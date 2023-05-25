@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import Head from "next/head";
 import { FaGithub, FaLinkedin, FaFilePdf } from "react-icons/fa";
-import { Tooltip } from "flowbite-react";
+import { Button, Tooltip } from "flowbite-react";
 
 export default function Home() {
   return (
@@ -45,11 +44,15 @@ export default function Home() {
                 </p>
 
                 <div className="mt-8 flex gap-4 items-center justify-start ">
-                  <FaGithub className="text-4xl text-gray-50 cursor-pointer hover:text-gray-950 transition-all duration-200" />
-
-                  <FaLinkedin className="text-4xl text-gray-50 cursor-pointer hover:text-linkedin-blue transition-all duration-200" />
-
-                  <FaFilePdf className="text-4xl text-gray-50 cursor-pointer hover:text-red-600 transition-all duration-200" />
+                  <Tooltip content="Github" placement="bottom">
+                    <FaGithub className="text-4xl text-gray-50 cursor-pointer hover:text-gray-950 transition-all duration-200" />
+                  </Tooltip>
+                  <Tooltip content="LinkedIn" placement="bottom">
+                    <FaLinkedin className="text-4xl text-gray-50 cursor-pointer hover:text-linkedin-blue transition-all duration-200" />
+                  </Tooltip>
+                  <Tooltip content="Meu Curriculo" placement="bottom">
+                    <FaFilePdf className="text-4xl text-gray-50 cursor-pointer hover:text-red-600 transition-all duration-200" />
+                  </Tooltip>
                 </div>
               </div>
 

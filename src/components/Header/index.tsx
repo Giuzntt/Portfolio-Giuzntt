@@ -3,7 +3,8 @@ import Image from "next/image";
 const Header = () => {
   return (
     <header
-      className="bg-gradient-to-r from-gray-200  fixed inset-x-0 top-0 z-50  w-full
+      className=" fixed inset-x-0 top-0 z-50  w-full
+      bg-gradient-to-r from-cornflower-blue to-periwinkle-blue 
     
     "
     >
@@ -16,7 +17,7 @@ const Header = () => {
             <a href="#" title="" className="flex">
               <Image
                 className="w-auto h-8"
-                src="vercel.svg"
+                src="logoDev.svg"
                 alt=""
                 width={121}
                 height={33}
@@ -63,7 +64,7 @@ const Header = () => {
             <a
               href="#"
               title=""
-              className="text-base text-black transition-all duration-200 hover:text-opacity-80"
+              className="text-lg text-gray-50 transition-all duration-200 hover:text-opacity-80"
             >
               {" "}
               Sobre mim{" "}
@@ -72,7 +73,7 @@ const Header = () => {
             <a
               href="#"
               title=""
-              className="text-base text-black transition-all duration-200 hover:text-opacity-80"
+              className="text-lg text-gray-50 transition-all duration-200 hover:text-opacity-80"
             >
               {" "}
               Projetos{" "}
@@ -81,7 +82,7 @@ const Header = () => {
             <a
               href="#"
               title=""
-              className="text-base text-black transition-all duration-200 hover:text-opacity-80"
+              className="text-lg text-gray-50 transition-all duration-200 hover:text-opacity-80"
             >
               {" "}
               Experiência{" "}
@@ -90,7 +91,7 @@ const Header = () => {
             <a
               href="#"
               title=""
-              className="text-base text-black transition-all duration-200 hover:text-opacity-80"
+              className="text-lg text-gray-50 transition-all duration-200 hover:text-opacity-80"
             >
               {" "}
               Formação{" "}
