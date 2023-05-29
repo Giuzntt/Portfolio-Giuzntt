@@ -1,14 +1,40 @@
 import Image from "next/image";
 import Head from "next/head";
-import { FaGithub, FaLinkedin, FaFilePdf } from "react-icons/fa";
-import { Button, Tooltip } from "flowbite-react";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaFilePdf,
+  FaReact,
+  FaMale,
+} from "react-icons/fa";
+import { Button, Timeline, Tooltip } from "flowbite-react";
 import Link from "next/link";
+import Card from "@/components/Card";
+import {
+  SiAuth0,
+  SiCsharp,
+  SiFigma,
+  SiGit,
+  SiJavascript,
+  SiJest,
+  SiMysql,
+  SiNextdotjs,
+  SiPostgresql,
+  SiPython,
+  SiReacthookform,
+  SiReactquery,
+  SiRedux,
+  SiSqlite,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
+import Badge from "@/components/Badge";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>Meu Portifolio</title>
       </Head>
 
       <main
@@ -108,17 +134,247 @@ export default function Home() {
             y2="119.445"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#758BFD" />
-            <stop offset="1" stop-color="#AEB8FE" />
+            AEB8FE
+            <stop stop-color="#8E9FFD" />
+            <stop offset="1" stop-color="#8E9FFD" />
           </linearGradient>
         </defs>
       </svg>
 
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center items-center h-16 bg-gray-50">
-        <p className="text-gray-500 text-sm font-light">
-          Feito com ❤️ por Giulianno Zanetti
-        </p>
-      </div>
+      <section className="bg-gray-50 w-full h-full my-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-3xl font-semibold leading-tight text-gray-400 sm:text-4xl lg:text-5xl  text-center">
+            Tecnologias que eu trabalho
+          </h3>
+          <div
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  sm:grid-cols-1 
+          
+          gap-5 mt-8"
+          >
+            {/* create card */}
+            <Card
+              icon={<FaReact className="text-4xl text-blue-500 mx-auto mt-5" />}
+              skill="React"
+              time="+2 anos de experiência"
+            />
+            <Card
+              icon={<SiRedux className="text-4xl text-redux mx-auto mt-5" />}
+              skill="Redux"
+              time="+2 anos de experiência"
+            />
+            <Card
+              icon={
+                <SiNextdotjs className="text-4xl text-gray-950 mx-auto mt-5" />
+              }
+              skill="Next.js"
+              time="+1 ano de experiência"
+            />
+            <Card
+              icon={
+                <SiTypescript className="text-4xl text-blue-400 mx-auto mt-5" />
+              }
+              skill="Typescript"
+              time="+2 anos de experiência"
+            />
+            <Card
+              icon={
+                <SiJavascript className="text-4xl text-yellow-300 mx-auto mt-5" />
+              }
+              skill="Javascript"
+              time="+2 anos de experiência"
+            />
+            <Card
+              icon={
+                <SiTailwindcss className="text-4xl text-cyan-300 mx-auto mt-5" />
+              }
+              skill="TailwindCSS"
+              time="+1 ano de experiência"
+            />
+
+            <Card
+              skill="GIT"
+              time="+2 anos de experiência"
+              icon={<SiGit className="text-4xl text-orange-400 mx-auto mt-5" />}
+            />
+
+            <Card
+              icon={<SiMysql className="text-4xl text-gray-950 mx-auto mt-5" />}
+              skill="MySQL"
+              time="+1 ano de experiência"
+            />
+            <Card
+              icon={
+                <SiPython className="text-4xl text-gray-950 mx-auto mt-5" />
+              }
+              skill="Python"
+              time="+1 ano de experiência"
+            />
+            <Card
+              icon={
+                <SiPostgresql className="text-4xl text-gray-950 mx-auto mt-5" />
+              }
+              skill="PostgreSQL"
+              time="+1 ano de experiência"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="bg-gray-50 w-full h-full my-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-3xl font-semibold leading-tight text-gray-400 sm:text-4xl lg:text-5xl  text-center">
+            Experiência Profissional
+          </h3>
+          <Timeline>
+            <Timeline.Item>
+              <Timeline.Point />
+              <Timeline.Content>
+                <Timeline.Time>Dezembro de 2022 - Maio de 2023</Timeline.Time>
+                <Timeline.Title>INTRABANK - Desenvolvedor JR.</Timeline.Title>
+                <Timeline.Body>
+                  <p className="text-gray-500 text-lg leading-7">
+                    Contribui com o desenvolvimento de uma plataforma de gestão
+                    de processos de análise de crédito, seguindo em visões de
+                    Compliance, Comercial e Crédito. A automação das etapas do
+                    processo de análise de crédito, desde a coleta de
+                    informações até a avaliação de risco e a aprovação de
+                    crédito. Incluindo contribui na integração de um OCR que
+                    atualizava e acompanhava em tempo real o processamento dos
+                    arquivos.
+                    <br />
+                  </p>
+                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
+                    Tecnologias Utilizadas:
+                  </h4>
+
+                  <div className="flex flex-wrap gap-2 ">
+                    <Badge icon={<FaReact className="text-xl" />}>
+                      React.JS
+                    </Badge>
+                    <Badge icon={<SiRedux className="text-xl" />}>
+                      Redux.js
+                    </Badge>
+                    <Badge icon={<SiTailwindcss className="text-xl" />}>
+                      TailwindCSS
+                    </Badge>
+                    <Badge icon={<SiTypescript className="text-xl" />}>
+                      Typescript
+                    </Badge>
+                    <Badge icon={<SiJavascript className="text-xl" />}>
+                      Javascript
+                    </Badge>
+                    <Badge icon={<SiPostgresql className="text-xl" />}>
+                      PostgreSQL
+                    </Badge>
+                    <Badge icon={<SiReactquery className="text-xl" />}>
+                      React Query (Cache)
+                    </Badge>
+                    <Badge icon={<SiAuth0 className="text-xl" />}>Auth0</Badge>
+                    <Badge icon={<SiCsharp className="text-xl" />}>C#</Badge>
+                    <Badge icon={<SiJest className="text-xl" />}>Jest</Badge>
+                    <Badge icon={<SiFigma className="text-xl" />}>Figma</Badge>
+                  </div>
+                </Timeline.Body>
+              </Timeline.Content>
+            </Timeline.Item>
+            <Timeline.Item>
+              <Timeline.Point />
+              <Timeline.Content>
+                <Timeline.Time>Junho de 2022 - Dezembro de 2022</Timeline.Time>
+                <Timeline.Title>MANAGEMENT SOLUTIONS -Trainee</Timeline.Title>
+                <Timeline.Body>
+                  <p className="text-gray-500 text-lg leading-7">
+                    A utilização do Python para processamento e análise de dados
+                    com persistência SQL. A criação de uma interface gráfica em
+                    ReactJS.
+                    <br />
+                  </p>
+                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
+                    Tecnologias Utilizadas:
+                  </h4>
+                  <div className="flex flex-wrap gap-2 ">
+                    <Badge icon={<FaReact className="text-xl" />}>
+                      React.JS
+                    </Badge>
+
+                    <Badge icon={<SiPython className="text-xl" />}>
+                      Python
+                    </Badge>
+                    <Badge icon={<SiJavascript className="text-xl" />}>
+                      Javascript
+                    </Badge>
+                    <Badge icon={<SiSqlite className="text-xl" />}>
+                      SQLite
+                    </Badge>
+                  </div>
+                </Timeline.Body>
+              </Timeline.Content>
+            </Timeline.Item>
+            <Timeline.Item>
+              <Timeline.Point />
+              <Timeline.Content>
+                <Timeline.Time>Outubro de 2021 - Abril de 2022</Timeline.Time>
+                <Timeline.Title>
+                  GRUPO MULTIPLICA - Estágio em Desenvolvimento Front-end
+                </Timeline.Title>
+                <Timeline.Body>
+                  <p className="text-gray-500 text-lg leading-7">
+                    Contribui na construção de um sistema para a automação de
+                    processos internos da empresa.
+                    <br />
+                  </p>
+                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
+                    Tecnologias Utilizadas:
+                  </h4>
+
+                  <div className="flex flex-wrap gap-2 ">
+                    <Badge icon={<FaReact className="text-xl" />}>
+                      React.JS
+                    </Badge>
+                    <Badge icon={<SiRedux className="text-xl" />}>
+                      Redux.js
+                    </Badge>
+                    <Badge icon={<SiTailwindcss className="text-xl" />}>
+                      TailwindCSS
+                    </Badge>
+                    <Badge icon={<SiTypescript className="text-xl" />}>
+                      Typescript
+                    </Badge>
+                    <Badge icon={<SiJavascript className="text-xl" />}>
+                      Javascript
+                    </Badge>
+                    <Badge icon={<SiReacthookform className="text-xl" />}>
+                      React Hook Form
+                    </Badge>
+                    <Badge icon={<SiJest className="text-xl" />}>Jest</Badge>
+                  </div>
+                </Timeline.Body>
+              </Timeline.Content>
+            </Timeline.Item>
+            <Timeline.Item>
+              <Timeline.Point />
+              <Timeline.Content>
+                <Timeline.Time>Agosto de 2021 - Abril de 2021</Timeline.Time>
+                <Timeline.Title>FIAP - Estágio Suporte de TI</Timeline.Title>
+                <Timeline.Body>
+                  <p className="text-gray-500 text-lg leading-7">
+                    Estagio na área de monitoria, onde auxiliava os professores
+                    durante as aulas e prestava suporte no funcionamento das
+                    máquinas dos laboratórios.
+                    <br />
+                  </p>
+                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
+                    Tecnologias Utilizadas:
+                  </h4>
+
+                  <div className="flex flex-wrap gap-2 ">
+                    <Badge>Nenhuma</Badge>
+                  </div>
+                </Timeline.Body>
+              </Timeline.Content>
+            </Timeline.Item>
+          </Timeline>
+        </div>
+      </section>
     </>
   );
 }

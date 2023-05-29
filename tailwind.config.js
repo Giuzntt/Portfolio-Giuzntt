@@ -20,6 +20,7 @@ module.exports = {
         "flash-white": "#F1F2F6",
         "orange-ut": "#FF8600",
         "linkedin-blue": "#0A66C2",
+        redux: "#764ABC",
       },
     },
   },
