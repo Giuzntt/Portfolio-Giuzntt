@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+const aspectRatio = require("@tailwindcss/aspect-ratio");
 module.exports = {
   content: [
     "./node_modules/flowbite-react/**/*.js",
@@ -24,5 +26,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [aspectRatio, require("flowbite/plugin")],
 };

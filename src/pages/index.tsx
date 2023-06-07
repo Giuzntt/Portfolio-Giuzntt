@@ -29,6 +29,9 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import Badge from "@/components/Badge";
+import SectionTitle from "@/components/SectionTitle";
+import { HorizontalDivider } from "@/components/HorizontalDivider";
+import { ProjectCard } from "@/components/ProjectCard";
 
 export default function Home() {
   return (
@@ -38,14 +41,14 @@ export default function Home() {
       </Head>
 
       <main
-        className="flex flex-col items-center justify-center w-full h-full 
+        className=" flex flex-col items-center justify-center w-full h-full 
          bg-gradient-to-r from-cornflower-blue to-periwinkle-blue 
 
       
       "
       >
         <section
-          className="pt-10 overflow-hidden  md:pt-0 sm:pt-16 2xl:pt-16 max-w-7xl mx-auto 
+          className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 max-w-7xl mx-auto  
         
         "
         >
@@ -143,9 +146,28 @@ export default function Home() {
 
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-semibold leading-tight text-gray-400 sm:text-4xl lg:text-5xl  text-center">
-            Tecnologias que eu trabalho
-          </h3>
+          <SectionTitle
+            title="Projetos em destaque"
+            subtitle="Ver todos os projetos"
+          />
+          <HorizontalDivider className="mb-16" />
+
+          <div>
+            <ProjectCard />
+            <HorizontalDivider className="mb-16" />
+            <ProjectCard />
+            <HorizontalDivider className="mb-16" />
+            <ProjectCard />
+            <HorizontalDivider className="mb-16" />
+            <ProjectCard />
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 w-full h-full my-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle title="Conhecimentos" />
+
           <div
             className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4  sm:grid-cols-1 
           
@@ -220,10 +242,8 @@ export default function Home() {
         </div>
       </section>
       <section className="bg-gray-50 w-full h-full my-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-semibold leading-tight text-gray-400 sm:text-4xl lg:text-5xl  text-center">
-            Experiência Profissional
-          </h3>
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle title="Experiência Profissional" />
           <Timeline>
             <Timeline.Item>
               <Timeline.Point />
@@ -353,8 +373,8 @@ export default function Home() {
             <Timeline.Item>
               <Timeline.Point />
               <Timeline.Content>
-                <Timeline.Time>Agosto de 2021 - Abril de 2021</Timeline.Time>
-                <Timeline.Title>FIAP - Estágio Suporte de TI</Timeline.Title>
+                <Timeline.Time>Agosto de 2021 - Outubro de 2021</Timeline.Time>
+                <Timeline.Title>FIAP - Estágio em Suporte de TI</Timeline.Title>
                 <Timeline.Body>
                   <p className="text-gray-500 text-lg leading-7">
                     Estagio na área de monitoria, onde auxiliava os professores
