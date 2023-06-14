@@ -1,14 +1,33 @@
 import Image from "next/image";
 import Badge from "../Badge";
-import { SiNextdotjs } from "react-icons/si";
-import { LinkProject } from "../LinkProject";
-import { HiArrowNarrowRight } from "react-icons/hi";
+import Link from "next/link";
+import { FaGithub, FaPage4 } from "react-icons/fa";
+import { Tooltip } from "flowbite-react";
+import { TbWorldWww } from "react-icons/tb";
 
 interface ProjectCardProps {
   className?: string;
+  title?: string;
+  description?: string;
+
+  src?: string;
+  badges: {
+    icon?: any;
+    nameIcon?: string;
+  }[];
+  linkGithub?: string;
+  linkRepository?: string;
 }
 
-export const ProjectCard = ({ className }: ProjectCardProps) => {
+export const ProjectCard = ({
+  className,
+  title,
+  description,
+  badges,
+  src,
+  linkGithub = "/",
+  linkRepository = "/",
+}: ProjectCardProps) => {
   return (
     <div className="flex gap-6 lg:gap-5 flex-col lg:flex-row my-5">
       <div
@@ -16,7 +35,7 @@ export const ProjectCard = ({ className }: ProjectCardProps) => {
       "
       >
         <Image
-          src="/feneco.jpg"
+          src={`/${src}`}
           width={569}
           height={300}
           alt="ProjectCard"
@@ -28,27 +47,34 @@ export const ProjectCard = ({ className }: ProjectCardProps) => {
 
       <div className="">
         <h3 className="flex items-center gap-3 font-medium text-2xl text-gray-500">
-          <Image src="/next.svg" width={20} height={20} alt="" />
-          Projeto 1
+          {title}
         </h3>
         <p
           className="my-6 text-gray-600 text-justify font-light leading-relaxed
         
         "
         >
-          O Feneco Talent foi criado como uma ideia de um novo modelo de
-          Processo Seletivo, baseado em Microtarefas. Usado como Trabalho de
-          Conclusão de Curso.
+          {description}
         </p>
         <div className="flex gap-x-2 gap-y-3 flex-wrap mb-8 lg:max-w-[350px]">
-          <Badge icon={<SiNextdotjs />}>NextJS</Badge>
-          <Badge icon={<SiNextdotjs />}>NextJS</Badge>
-          <Badge icon={<SiNextdotjs />}>NextJS</Badge>
+          {badges.map((badge) => (
+            <Badge icon={badge.icon} key={badge.nameIcon}>
+              {badge.nameIcon}
+            </Badge>
+          ))}
         </div>
-        <LinkProject href={"/Projects"}>
-          Ver Projeto
-          <HiArrowNarrowRight />
-        </LinkProject>
+        <div className="flex gap-3">
+          <Link href={linkRepository} target="_blank">
+            <Tooltip content="Ver Site" placement="bottom">
+              <TbWorldWww className="text-4xl text-cornflower-blue" />
+            </Tooltip>
+          </Link>
+          <Link href={linkGithub} target="_blank">
+            <Tooltip content="Ver Repositório" placement="bottom">
+              <FaGithub className="text-4xl text-cornflower-blue" />
+            </Tooltip>
+          </Link>
+        </div>
       </div>
     </div>
   );

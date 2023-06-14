@@ -17,14 +17,17 @@ import {
   SiGit,
   SiJavascript,
   SiJest,
+  SiMaterialdesign,
   SiMysql,
   SiNextdotjs,
   SiPostgresql,
   SiPython,
   SiReacthookform,
   SiReactquery,
+  SiReactrouter,
   SiRedux,
   SiSqlite,
+  SiStyledcomponents,
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
@@ -42,13 +45,13 @@ export default function Home() {
 
       <main
         className=" flex flex-col items-center justify-center w-full h-full 
-         bg-gradient-to-r from-cornflower-blue to-periwinkle-blue 
+         bg-gradient-to-r from-cornflower-blue to-periwinkle-blue  bg-no-repeat bg-cover mt-5
 
       
       "
       >
         <section
-          className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 max-w-7xl mx-auto  
+          className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5
         
         "
         >
@@ -146,20 +149,89 @@ export default function Home() {
 
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            title="Projetos em destaque"
-            subtitle="Ver todos os projetos"
-          />
+          <SectionTitle title="Projetos em destaque" />
           <HorizontalDivider className="mb-16" />
 
           <div>
-            <ProjectCard />
+            <ProjectCard
+              title="Feneco Talent"
+              src="feneco.jpg"
+              description="Plataforma de gerenciamento de talentos, onde é possível criar um perfil, adicionar projetos e habilidades, e se conectar com outros usuários."
+              badges={[
+                {
+                  icon: <FaReact className="text-xl" />,
+                  nameIcon: "React",
+                },
+                {
+                  icon: <SiMaterialdesign className="text-xl" />,
+                  nameIcon: "Material UI",
+                },
+                {
+                  icon: <SiTypescript className="text-xl" />,
+                  nameIcon: "Typescript",
+                },
+              ]}
+              linkRepository="https://feneco.vercel.app/"
+              linkGithub="https://github.com/Giuzntt/Feneco"
+            />
             <HorizontalDivider className="mb-16" />
-            <ProjectCard />
+            <ProjectCard
+              title="Projeto Marvel  - Minhas HQ's"
+              src="minhasHQS.jpg"
+              description="Aplicação web que consome a API da Marvel, onde é possível pesquisar por personagens e HQ's, e adicionar HQ's aos favoritos."
+              badges={[
+                {
+                  icon: <FaReact className="text-xl" />,
+                  nameIcon: "React",
+                },
+                {
+                  icon: <SiRedux className="text-xl" />,
+                  nameIcon: "Redux",
+                },
+                {
+                  icon: <SiTailwindcss className="text-xl" />,
+                  nameIcon: "TailwindCSS",
+                },
+                {
+                  icon: <SiTypescript className="text-xl" />,
+                  nameIcon: "Typescript",
+                },
+              ]}
+              linkRepository="https://desafio-m-ind-thru.vercel.app/"
+              linkGithub="https://github.com/Giuzntt/Desafio-MIndThru"
+            />
+
             <HorizontalDivider className="mb-16" />
-            <ProjectCard />
-            <HorizontalDivider className="mb-16" />
-            <ProjectCard />
+
+            <ProjectCard
+              title="Easy Courrier"
+              src="easyCourrier2.jpg"
+              description="Desafio Processo Seletivo: Buscar o rastreio  de uma encomenda e exibir o status atual via API REST."
+              badges={[
+                {
+                  icon: <FaReact className="text-xl" />,
+                  nameIcon: "React",
+                },
+                {
+                  icon: <SiStyledcomponents className="text-xl" />,
+                  nameIcon: "Styled Components",
+                },
+                {
+                  icon: <FaReact className="text-xl" />,
+                  nameIcon: "Context API",
+                },
+                {
+                  icon: <SiTypescript className="text-xl" />,
+                  nameIcon: "Typescript",
+                },
+                {
+                  icon: <SiReactrouter className="text-xl" />,
+                  nameIcon: "React Router",
+                },
+              ]}
+              linkRepository="https://projeto-easy-courrier.vercel.app/"
+              linkGithub="https://github.com/Giuzntt/Projeto-Easy-Courrier"
+            />
           </div>
         </div>
       </section>
