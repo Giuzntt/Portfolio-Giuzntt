@@ -176,7 +176,7 @@ export default function Home() {
             />
             <HorizontalDivider className="mb-16" />
             <ProjectCard
-              title="Projeto Marvel  - Minhas HQ's"
+              title="MINHAS .HQS"
               src="minhasHQS.jpg"
               description="Aplicação web que consome a API da Marvel, onde é possível pesquisar por personagens e HQ's, e adicionar HQ's aos favoritos."
               badges={[
