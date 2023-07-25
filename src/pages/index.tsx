@@ -233,8 +233,8 @@ export default function Home({ pageData }: HomePageType) {
                     icon: <FaReact className="text-xl" />,
                     nameIcon: tech.name,
                   }))}
-                  linkRepository={project.gitHubUrl}
-                  linkGithub={project.liveProjectUrl}
+                  linkRepository={project.liveProjectUrl}
+                  linkGithub={project.gitHubUrl}
                 />
                 <HorizontalDivider className="mb-16" />
               </>
