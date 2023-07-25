@@ -137,7 +137,7 @@ export default function Home({ pageData }: HomePageType) {
                 </div>
 
                 <div className="w-full flex justify-start mt-5  flex-col">
-                  <h3 className="text-2xl font-bold leading-tight text-white ">
+                  <h3 className="text-2xl  leading-tight text-white font-semibold">
                     Me mande um e-mail
                   </h3>
 
