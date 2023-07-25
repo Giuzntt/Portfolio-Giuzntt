@@ -31,12 +31,42 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
+import { AiOutlineMail } from "react-icons/ai";
+
 import Badge from "@/components/Badge";
 import SectionTitle from "@/components/SectionTitle";
 import { HorizontalDivider } from "@/components/HorizontalDivider";
 import { ProjectCard } from "@/components/ProjectCard";
+import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
+import { HomePageType } from "@/types/page-info";
+import { RichText } from "@/components/rich-text";
 
-export default function Home() {
+const getPageData = async () => {
+  const query = `
+    query Assets {
+  page(where: {slug: "home"}) {
+    introduction {
+      raw
+    }
+    knowTechs {
+      iconSvg
+      name
+      startDate
+    }
+    techonologies {
+      name
+    }
+  }
+}
+  `;
+
+  return fetchHygraphQuery(query);
+};
+
+export default function Home({ pageData }: HomePageType) {
+  const { introduction, knowTechs, techonologies } = pageData.page;
+  console.log(pageData);
+
   return (
     <>
       <Head>
@@ -68,14 +98,19 @@ export default function Home() {
                     Meu nome é Giulianno
                   </span>
                 </h2>
-                <p
+                <div
                   className="max-w-lg mt-3 text-2xl leading-relaxed  md:mt-8 text-gray-50 font-light
                 "
                 >
-                  Tenho 22 anos, sou desenvolvedor front-end com 2 anos de
-                  experiência. Trabalho como freelancer e estou sempre aberto a
-                  novas oportunidades.
-                </p>
+                  <RichText content={introduction.raw} />
+                </div>
+                <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px] my-3">
+                  {techonologies?.map((tech) => (
+                    <Badge key={tech.name} className="text-gray-50 bg-blue-400">
+                      {tech.name}
+                    </Badge>
+                  ))}
+                </div>
 
                 <div className="mt-8 flex gap-4 items-center justify-start ">
                   <Tooltip content="Github" placement="bottom">
@@ -93,12 +128,25 @@ export default function Home() {
                   </Tooltip>
                   <Tooltip content="Meu Currículo" placement="bottom">
                     <Link
-                      href="https://drive.google.com/file/d/1HsjjexYlam_abBI4TBxQqTkNkgHSGON_/view?usp=sharing"
+                      href="https://drive.google.com/file/d/1JorcAk_RnvzfQC3d6QVdcq4GR64jJ1eg/view?usp=sharing"
                       target="_blank"
                     >
                       <FaFilePdf className="text-4xl text-gray-50 cursor-pointer hover:text-red-600 transition-all duration-200" />
                     </Link>
                   </Tooltip>
+                </div>
+
+                <div className="w-full flex justify-start mt-5  flex-col">
+                  <h3 className="text-2xl font-bold leading-tight text-white ">
+                    Me mande um e-mail
+                  </h3>
+
+                  <button className="w-full  bg-white text-cornflower-blue font-bold rounded-lg px-4 py-2 mt-5 transition duration-300 ease-in-out hover:bg-gray-200 mr-6 uppercase relative">
+                    <span className="absolute left-0 top-0 flex items-center justify-center h-full w-10 text-blue-500">
+                      <AiOutlineMail />
+                    </span>
+                    giuzntt@gmail.com
+                  </button>
                 </div>
               </div>
 
@@ -141,8 +189,8 @@ export default function Home() {
             gradientUnits="userSpaceOnUse"
           >
             AEB8FE
-            <stop stop-color="#8E9FFD" />
-            <stop offset="1" stop-color="#8E9FFD" />
+            <stop stopColor="#8E9FFD" />
+            <stop offset="1" stopColor="#8E9FFD" />
           </linearGradient>
         </defs>
       </svg>
@@ -469,4 +517,15 @@ export default function Home() {
       </section>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const response = await getPageData();
+  console.log(response);
+
+  return {
+    props: {
+      pageData: response,
+    },
+  };
 }
