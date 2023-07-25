@@ -232,6 +232,30 @@ export default function Home() {
               linkRepository="https://projeto-easy-courrier.vercel.app/"
               linkGithub="https://github.com/Giuzntt/Projeto-Easy-Courrier"
             />
+
+            <HorizontalDivider className="mb-16" />
+            <ProjectCard
+              title="Dev Journey"
+              src="devjourney.jpg"
+              description="Desafio Processo Seletivo: Criar uma Landing Page responsiva com o tema Dev Journey, página de viagens para desenvolvedores."
+              badges={[
+                {
+                  icon: <SiNextdotjs className="text-xl" />,
+                  nameIcon: "React",
+                },
+                {
+                  icon: <SiTailwindcss className="text-xl" />,
+                  nameIcon: "TailwindCSS",
+                },
+
+                {
+                  icon: <SiTypescript className="text-xl" />,
+                  nameIcon: "Typescript",
+                },
+              ]}
+              linkRepository="https://desafio-wizzi-phi.vercel.app/"
+              linkGithub="https://github.com/Giuzntt/desafio-wizzi"
+            />
           </div>
         </div>
       </section>
