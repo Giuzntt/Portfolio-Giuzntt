@@ -12,8 +12,25 @@ export type KnowTech = {
   startDate: string;
 };
 
+export type Profile = {
+  url: string;
+};
+
 export type Technologies = {
   name: string;
+};
+
+export type Project = {
+  slug: string;
+  thumbnail: {
+    url: string;
+  };
+  title: string;
+  shortDescription: string;
+  description: string;
+  technologies: Technologies[];
+  liveProjectUrl: string;
+  gitHubUrl: string;
 };
 
 export type HomePageInfo = {
@@ -24,6 +41,8 @@ export type HomePageInfo = {
   socials: Social[];
   knowTechs: KnowTech[];
   technologies: Technologies[];
+  profilePicture: Profile;
+  highlightProjects: Project[];
 };
 
 export type HomePageType = {

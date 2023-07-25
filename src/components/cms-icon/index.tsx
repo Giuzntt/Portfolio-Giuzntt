@@ -10,7 +10,7 @@ export const CMSIcon = ({ className, icon }: CMSIconProps) => {
     <div
       dangerouslySetInnerHTML={{ __html: icon }}
       className={cn(
-        "text-4xl text-gray-50 cursor-pointer hover:text-gray-950 transition-all duration-200",
+        "text-4xl text-gray-50 cursor-pointer  transition-all duration-200 mx-auto",
         className
       )}
     />

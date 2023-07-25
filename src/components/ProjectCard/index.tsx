@@ -35,7 +35,7 @@ export const ProjectCard = ({
       "
       >
         <Image
-          src={`/${src}`}
+          src={`${src}`}
           width={569}
           height={300}
           alt="ProjectCard"

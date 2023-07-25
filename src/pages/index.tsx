@@ -45,7 +45,7 @@ import { SocialIcon } from "@/components/SocialIcon";
 
 const getPageData = async () => {
   const query = `
-    query Assets {
+query Assets {
   page(where: {slug: "home"}) {
     introduction {
       raw
@@ -63,16 +63,45 @@ const getPageData = async () => {
       url
       iconSvg
     }
+    profilePicture {
+      url
+    }
+    highlightProjects {
+      slug
+      thumbnail {
+        url
+      }
+      title
+      shortDescription
+      technologies {
+        name
+      }
+      sections {
+        image {
+          url
+        }
+      }
+      gitHubUrl
+      liveProjectUrl
+    }
   }
 }
+
   `;
 
-  return fetchHygraphQuery(query);
+  return fetchHygraphQuery(query, 60 * 60 * 24);
 };
 
 export default function Home({ pageData }: HomePageType) {
-  const { introduction, knowTechs, technologies, socials } = pageData.page;
-  console.log(pageData);
+  const {
+    introduction,
+    knowTechs,
+    technologies,
+    socials,
+    profilePicture,
+    highlightProjects,
+  } = pageData.page;
+  console.log(highlightProjects);
 
   return (
     <>
@@ -153,8 +182,8 @@ export default function Home({ pageData }: HomePageType) {
                 />
                 <Image
                   className="absolute inset-x-0 bottom-0  -translate-x-1/2 left-1/2"
-                  src="/giulianno.png"
-                  alt=""
+                  src={profilePicture.url}
+                  alt="Profile Image of Giulianno"
                   width={800}
                   height={800}
                 />
@@ -181,7 +210,6 @@ export default function Home({ pageData }: HomePageType) {
             y2="119.445"
             gradientUnits="userSpaceOnUse"
           >
-            AEB8FE
             <stop stopColor="#8E9FFD" />
             <stop offset="1" stopColor="#8E9FFD" />
           </linearGradient>
@@ -194,85 +222,23 @@ export default function Home({ pageData }: HomePageType) {
           <HorizontalDivider className="mb-16" />
 
           <div>
-            <ProjectCard
-              title="Feneco Talent"
-              src="feneco.jpg"
-              description="Plataforma de gerenciamento de talentos, onde é possível criar um perfil, adicionar projetos e habilidades, e se conectar com outros usuários."
-              badges={[
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiMaterialdesign className="text-xl" />,
-                  nameIcon: "Material UI",
-                },
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-              ]}
-              linkRepository="https://feneco.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/Feneco"
-            />
-            <HorizontalDivider className="mb-16" />
-            <ProjectCard
-              title="MINHAS .HQS"
-              src="minhasHQS.jpg"
-              description="Aplicação web que consome a API da Marvel, onde é possível pesquisar por personagens e HQ's, e adicionar HQ's aos favoritos."
-              badges={[
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiRedux className="text-xl" />,
-                  nameIcon: "Redux",
-                },
-                {
-                  icon: <SiTailwindcss className="text-xl" />,
-                  nameIcon: "TailwindCSS",
-                },
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-              ]}
-              linkRepository="https://desafio-m-ind-thru.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/Desafio-MIndThru"
-            />
-
-            <HorizontalDivider className="mb-16" />
-
-            <ProjectCard
-              title="Easy Courrier"
-              src="easyCourrier2.jpg"
-              description="Desafio Processo Seletivo: Buscar o rastreio  de uma encomenda e exibir o status atual via API REST."
-              badges={[
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiStyledcomponents className="text-xl" />,
-                  nameIcon: "Styled Components",
-                },
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "Context API",
-                },
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-                {
-                  icon: <SiReactrouter className="text-xl" />,
-                  nameIcon: "React Router",
-                },
-              ]}
-              linkRepository="https://projeto-easy-courrier.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/Projeto-Easy-Courrier"
-            />
+            {highlightProjects?.map((project) => (
+              <>
+                <ProjectCard
+                  key={`project-${project.title}`}
+                  title={project.title}
+                  src={project.thumbnail.url}
+                  description={project.shortDescription}
+                  badges={project.technologies.map((tech) => ({
+                    icon: <FaReact className="text-xl" />,
+                    nameIcon: tech.name,
+                  }))}
+                  linkRepository={project.gitHubUrl}
+                  linkGithub={project.liveProjectUrl}
+                />
+                <HorizontalDivider className="mb-16" />
+              </>
+            ))}
           </div>
         </div>
       </section>
@@ -287,70 +253,14 @@ export default function Home({ pageData }: HomePageType) {
           gap-5 mt-8"
           >
             {/* create card */}
-            <Card
-              icon={<FaReact className="text-4xl text-blue-500 mx-auto mt-5" />}
-              skill="React"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={<SiRedux className="text-4xl text-redux mx-auto mt-5" />}
-              skill="Redux"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={
-                <SiNextdotjs className="text-4xl text-gray-950 mx-auto mt-5" />
-              }
-              skill="Next.js"
-              time="+1 ano de experiência"
-            />
-            <Card
-              icon={
-                <SiTypescript className="text-4xl text-blue-400 mx-auto mt-5" />
-              }
-              skill="Typescript"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={
-                <SiJavascript className="text-4xl text-yellow-300 mx-auto mt-5" />
-              }
-              skill="Javascript"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={
-                <SiTailwindcss className="text-4xl text-cyan-300 mx-auto mt-5" />
-              }
-              skill="TailwindCSS"
-              time="+1 ano de experiência"
-            />
-
-            <Card
-              skill="GIT"
-              time="+2 anos de experiência"
-              icon={<SiGit className="text-4xl text-orange-400 mx-auto mt-5" />}
-            />
-
-            <Card
-              icon={<SiMysql className="text-4xl text-gray-950 mx-auto mt-5" />}
-              skill="MySQL"
-              time="+1 ano de experiência"
-            />
-            <Card
-              icon={
-                <SiPython className="text-4xl text-gray-950 mx-auto mt-5" />
-              }
-              skill="Python"
-              time="+1 ano de experiência"
-            />
-            <Card
-              icon={
-                <SiPostgresql className="text-4xl text-gray-950 mx-auto mt-5" />
-              }
-              skill="PostgreSQL"
-              time="+1 ano de experiência"
-            />
+            {knowTechs?.map((tech) => (
+              <Card
+                key={tech.name}
+                icon={tech.iconSvg}
+                skill={tech.name}
+                time={tech.startDate}
+              />
+            ))}
           </div>
         </div>
       </section>
