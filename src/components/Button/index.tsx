@@ -1,33 +1,52 @@
-// Import necessary dependencies and utility functions
-import React from "react";
+import React, { ReactNode, useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
-import { ComponentProps, ElementType } from "react";
-import { AiOutlineMail } from "react-icons/ai";
-import { IconType } from "react-icons/lib";
+import { ComponentProps } from "react";
+import { FaCheck, FaCheckCircle } from "react-icons/fa";
 
-// Define the ButtonProps type
 type ButtonProps = ComponentProps<"button"> & {
   children?: React.ReactNode;
   className?: string;
-  icon?: IconType;
+  icon?: ReactNode;
+  copy: string;
 };
 
-// Button component with optional icon
-export const Button = ({ children, className, icon: Icon }: ButtonProps) => {
+export const ButtonCopy = ({
+  children,
+  className,
+  icon,
+  copy,
+}: ButtonProps) => {
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopyClick = useCallback(() => {
+    if (copy) {
+      navigator.clipboard.writeText(copy).then(
+        () => {
+          console.log("Text copied:", copy);
+          setIsCopied(true);
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 2000);
+        },
+        (error) => {
+          console.error("Error copying text:", error);
+        }
+      );
+    }
+  }, [copy]);
+
   return (
     <button
       className={cn(
-        "w-full bg-white text-cornflower-blue font-bold rounded-lg px-4 py-2 mt-5 transition duration-300 ease-in-out hover:bg-gray-200 mr-6 uppercase relative",
+        "w-full bg-cornflower-blue-light text-white font-bold rounded-lg px-4 py-2 mt-5 transition duration-300 ease-in-out hover:bg-blue-200 mr-6 uppercase relative",
         className
       )}
+      onClick={handleCopyClick}
     >
-      {/* Check if the icon is provided, and render it */}
-      {Icon && (
-        <span className="absolute left-0 top-0 flex items-center justify-center h-full w-10 text-blue-500">
-          <Icon className="w-5 h-5" />
-        </span>
-      )}
-      {children}
+      <span className="absolute left-0 top-0 flex items-center justify-center h-full w-10 text-white text-2xl">
+        {isCopied ? <FaCheckCircle className="w-6 h-6 " /> : icon}
+      </span>
+      {isCopied ? "Email Copiado!" : children}
     </button>
   );
 };

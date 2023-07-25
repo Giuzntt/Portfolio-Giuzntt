@@ -17,6 +17,7 @@ module.exports = {
       },
       colors: {
         "persian-indigo": "#27187E",
+        "cornflower-blue-light": "#ACB9FF",
         "cornflower-blue": "#758BFD",
         "periwinkle-blue": "#AEB8FE",
         "flash-white": "#F1F2F6",

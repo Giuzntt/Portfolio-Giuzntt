@@ -40,6 +40,8 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
 import { HomePageType } from "@/types/page-info";
 import { RichText } from "@/components/rich-text";
+import { ButtonCopy } from "@/components/Button";
+import { SocialIcon } from "@/components/SocialIcon";
 
 const getPageData = async () => {
   const query = `
@@ -53,8 +55,13 @@ const getPageData = async () => {
       name
       startDate
     }
-    techonologies {
+    technologies {
       name
+    }
+    socials {
+      name
+      url
+      iconSvg
     }
   }
 }
@@ -64,7 +71,7 @@ const getPageData = async () => {
 };
 
 export default function Home({ pageData }: HomePageType) {
-  const { introduction, knowTechs, techonologies } = pageData.page;
+  const { introduction, knowTechs, technologies, socials } = pageData.page;
   console.log(pageData);
 
   return (
@@ -105,7 +112,7 @@ export default function Home({ pageData }: HomePageType) {
                   <RichText content={introduction.raw} />
                 </div>
                 <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px] my-3">
-                  {techonologies?.map((tech) => (
+                  {technologies?.map((tech) => (
                     <Badge key={tech.name} className="text-gray-50 bg-blue-400">
                       {tech.name}
                     </Badge>
@@ -113,27 +120,16 @@ export default function Home({ pageData }: HomePageType) {
                 </div>
 
                 <div className="mt-8 flex gap-4 items-center justify-start ">
-                  <Tooltip content="Github" placement="bottom">
-                    <Link href="https://www.github.com/Giuzntt" target="_blank">
-                      <FaGithub className="text-4xl text-gray-50 cursor-pointer hover:text-gray-950 transition-all duration-200" />
-                    </Link>
-                  </Tooltip>
-                  <Tooltip content="LinkedIn" placement="bottom">
-                    <Link
-                      href="https://www.linkedin.com/in/giulianno-zanetti/"
+                  {socials?.map((social) => (
+                    <SocialIcon
+                      key={`social-${social.name}`}
+                      nameSocial={social.name}
+                      icon={social.iconSvg}
                       target="_blank"
-                    >
-                      <FaLinkedin className="text-4xl text-gray-50 cursor-pointer hover:text-linkedin-blue transition-all duration-200" />
-                    </Link>
-                  </Tooltip>
-                  <Tooltip content="Meu Currículo" placement="bottom">
-                    <Link
-                      href="https://drive.google.com/file/d/1JorcAk_RnvzfQC3d6QVdcq4GR64jJ1eg/view?usp=sharing"
-                      target="_blank"
-                    >
-                      <FaFilePdf className="text-4xl text-gray-50 cursor-pointer hover:text-red-600 transition-all duration-200" />
-                    </Link>
-                  </Tooltip>
+                      href={social.url}
+                      placement="bottom"
+                    />
+                  ))}
                 </div>
 
                 <div className="w-full flex justify-start mt-5  flex-col">
@@ -141,12 +137,9 @@ export default function Home({ pageData }: HomePageType) {
                     Me mande um e-mail
                   </h3>
 
-                  <button className="w-full  bg-white text-cornflower-blue font-bold rounded-lg px-4 py-2 mt-5 transition duration-300 ease-in-out hover:bg-gray-200 mr-6 uppercase relative">
-                    <span className="absolute left-0 top-0 flex items-center justify-center h-full w-10 text-blue-500">
-                      <AiOutlineMail />
-                    </span>
+                  <ButtonCopy icon={<AiOutlineMail />} copy="giuzntt@gmail.com">
                     giuzntt@gmail.com
-                  </button>
+                  </ButtonCopy>
                 </div>
               </div>
 

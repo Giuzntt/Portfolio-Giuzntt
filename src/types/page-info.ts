@@ -1,6 +1,7 @@
 import type { RichTextContent } from "@graphcms/rich-text-types";
 
 export type Social = {
+  name: string;
   url: string;
   iconSvg: string;
 };
@@ -22,7 +23,7 @@ export type HomePageInfo = {
 
   socials: Social[];
   knowTechs: KnowTech[];
-  techonologies: Technologies[];
+  technologies: Technologies[];
 };
 
 export type HomePageType = {
