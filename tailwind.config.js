@@ -25,6 +25,10 @@ module.exports = {
         "linkedin-blue": "#0A66C2",
         redux: "#764ABC",
       },
+
+      spacing: {
+        "3/4": "133.33%", // For a 3:4 aspect ratio
+      },
     },
   },
   plugins: [aspectRatio, require("flowbite/plugin")],

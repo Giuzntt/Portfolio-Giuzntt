@@ -1,36 +1,10 @@
 import Image from "next/image";
 import Head from "next/head";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaFilePdf,
-  FaReact,
-  FaMale,
-} from "react-icons/fa";
-import { Button, Timeline, Tooltip } from "flowbite-react";
+import { FaReact } from "react-icons/fa";
+import { Timeline } from "flowbite-react";
 import Link from "next/link";
 import Card from "@/components/Card";
-import {
-  SiAuth0,
-  SiCsharp,
-  SiFigma,
-  SiGit,
-  SiJavascript,
-  SiJest,
-  SiMaterialdesign,
-  SiMysql,
-  SiNextdotjs,
-  SiPostgresql,
-  SiPython,
-  SiReacthookform,
-  SiReactquery,
-  SiReactrouter,
-  SiRedux,
-  SiSqlite,
-  SiStyledcomponents,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
+
 import { AiOutlineMail } from "react-icons/ai";
 
 import Badge from "@/components/Badge";
@@ -42,6 +16,7 @@ import { HomePageType } from "@/types/page-info";
 import { RichText } from "@/components/rich-text";
 import { ButtonCopy } from "@/components/Button";
 import { SocialIcon } from "@/components/SocialIcon";
+import { ExperienceItem } from "@/components/ExperienceItem";
 
 const getPageData = async () => {
   const query = `
@@ -85,8 +60,23 @@ query Assets {
       liveProjectUrl
     }
   }
+  workExperiences {
+    companyName
+    companyUrl
+    endDate
+    startDate
+    description {
+      raw
+    }
+    role
+    technologies {
+      name
+    }
+    companyLogo {
+      id
+    }
+  }
 }
-
   `;
 
   return fetchHygraphQuery(query, 60 * 60 * 24);
@@ -101,7 +91,12 @@ export default function Home({ pageData }: HomePageType) {
     profilePicture,
     highlightProjects,
   } = pageData.page;
-  console.log(highlightProjects);
+  const { workExperiences } = pageData;
+
+  console.log(
+    "🚀 ~ file: index.tsx:115 ~ Home ~ workExperiences:",
+    workExperiences
+  );
 
   return (
     <>
@@ -218,26 +213,40 @@ export default function Home({ pageData }: HomePageType) {
 
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle title="Projetos em destaque" />
+          <div className="flex items-center justify-between">
+            <SectionTitle title="Projetos em destaque" />
+            <Link
+              href={"/"}
+              className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
+            >
+              Ver todos os projetos
+            </Link>
+          </div>
+
           <HorizontalDivider className="mb-16" />
 
           <div>
             {highlightProjects?.map((project) => (
-              <>
+              <div key={`project-${project.title}`}>
                 <ProjectCard
-                  key={`project-${project.title}`}
                   title={project.title}
                   src={project.thumbnail.url}
                   description={project.shortDescription}
                   badges={project.technologies.map((tech) => ({
-                    icon: <FaReact className="text-xl" />,
+                    icon: (
+                      <FaReact
+                        key={`project-${project.title}-${tech.name}`}
+                        className="text-xl"
+                      />
+                    ),
                     nameIcon: tech.name,
                   }))}
                   linkRepository={project.liveProjectUrl}
                   linkGithub={project.gitHubUrl}
+                  href={project.slug}
                 />
                 <HorizontalDivider className="mb-16" />
-              </>
+              </div>
             ))}
           </div>
         </div>
@@ -268,153 +277,11 @@ export default function Home({ pageData }: HomePageType) {
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Experiência Profissional" />
           <Timeline>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Dezembro de 2022 - Maio de 2023</Timeline.Time>
-                <Timeline.Title>INTRABANK - Desenvolvedor JR.</Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    Contribui com o desenvolvimento de uma plataforma de gestão
-                    de processos de análise de crédito, seguindo em visões de
-                    Compliance, Comercial e Crédito. A automação das etapas do
-                    processo de análise de crédito, desde a coleta de
-                    informações até a avaliação de risco e a aprovação de
-                    crédito. Incluindo contribui na integração de um OCR que
-                    atualizava e acompanhava em tempo real o processamento dos
-                    arquivos.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge icon={<FaReact className="text-xl" />}>
-                      React.JS
-                    </Badge>
-                    <Badge icon={<SiRedux className="text-xl" />}>
-                      Redux.js
-                    </Badge>
-                    <Badge icon={<SiTailwindcss className="text-xl" />}>
-                      TailwindCSS
-                    </Badge>
-                    <Badge icon={<SiTypescript className="text-xl" />}>
-                      Typescript
-                    </Badge>
-                    <Badge icon={<SiJavascript className="text-xl" />}>
-                      Javascript
-                    </Badge>
-                    <Badge icon={<SiPostgresql className="text-xl" />}>
-                      PostgreSQL
-                    </Badge>
-                    <Badge icon={<SiReactquery className="text-xl" />}>
-                      React Query (Cache)
-                    </Badge>
-                    <Badge icon={<SiAuth0 className="text-xl" />}>Auth0</Badge>
-                    <Badge icon={<SiCsharp className="text-xl" />}>C#</Badge>
-                    <Badge icon={<SiJest className="text-xl" />}>Jest</Badge>
-                    <Badge icon={<SiFigma className="text-xl" />}>Figma</Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Junho de 2022 - Dezembro de 2022</Timeline.Time>
-                <Timeline.Title>MANAGEMENT SOLUTIONS -Trainee</Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    A utilização do Python para processamento e análise de dados
-                    com persistência SQL. A criação de uma interface gráfica em
-                    ReactJS.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge icon={<FaReact className="text-xl" />}>
-                      React.JS
-                    </Badge>
-
-                    <Badge icon={<SiPython className="text-xl" />}>
-                      Python
-                    </Badge>
-                    <Badge icon={<SiJavascript className="text-xl" />}>
-                      Javascript
-                    </Badge>
-                    <Badge icon={<SiSqlite className="text-xl" />}>
-                      SQLite
-                    </Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Outubro de 2021 - Abril de 2022</Timeline.Time>
-                <Timeline.Title>
-                  GRUPO MULTIPLICA - Estágio em Desenvolvimento Front-end
-                </Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    Contribui na construção de um sistema para a automação de
-                    processos internos da empresa.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge icon={<FaReact className="text-xl" />}>
-                      React.JS
-                    </Badge>
-                    <Badge icon={<SiRedux className="text-xl" />}>
-                      Redux.js
-                    </Badge>
-                    <Badge icon={<SiTailwindcss className="text-xl" />}>
-                      TailwindCSS
-                    </Badge>
-                    <Badge icon={<SiTypescript className="text-xl" />}>
-                      Typescript
-                    </Badge>
-                    <Badge icon={<SiJavascript className="text-xl" />}>
-                      Javascript
-                    </Badge>
-                    <Badge icon={<SiReacthookform className="text-xl" />}>
-                      React Hook Form
-                    </Badge>
-                    <Badge icon={<SiJest className="text-xl" />}>Jest</Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Agosto de 2021 - Outubro de 2021</Timeline.Time>
-                <Timeline.Title>FIAP - Estágio em Suporte de TI</Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    Estagio na área de monitoria, onde auxiliava os professores
-                    durante as aulas e prestava suporte no funcionamento das
-                    máquinas dos laboratórios.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge>Nenhuma</Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
+            {workExperiences?.map((work) => (
+              <div key={`work-${work.companyName}`}>
+                <ExperienceItem experience={work} />
+              </div>
+            ))}
           </Timeline>
         </div>
       </section>

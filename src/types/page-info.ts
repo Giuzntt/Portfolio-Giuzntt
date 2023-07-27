@@ -1,4 +1,5 @@
 import type { RichTextContent } from "@graphcms/rich-text-types";
+import { WorkExperience } from "./work-experience";
 
 export type Social = {
   name: string;
@@ -48,5 +49,6 @@ export type HomePageInfo = {
 export type HomePageType = {
   pageData: {
     page: HomePageInfo;
+    workExperiences: WorkExperience[];
   };
 };
