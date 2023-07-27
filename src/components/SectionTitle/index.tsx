@@ -10,7 +10,13 @@ interface SectionTitleProps {
 const SectionTitle = ({ title, subtitle, className }: SectionTitleProps) => {
   return (
     <div className={cn("flex  flex-col gap-3", className)}>
-      <h3 className="text-4xl  font-medium text-cornflower-blue">{title}</h3>
+      <h3
+        className="text-4xl  font-medium text-cornflower-blue md:text-xl
+      
+      "
+      >
+        {title}
+      </h3>
       {subtitle && (
         <div className="flex justify-end items-center gap-2">
           <HiMenu className="text-md text-cornflower-blue" />

@@ -91,11 +91,6 @@ export default function Home({ pageData }: HomePageType) {
   } = pageData.page;
   const { workExperiences } = pageData;
 
-  console.log(
-    "🚀 ~ file: index.tsx:115 ~ Home ~ workExperiences:",
-    workExperiences
-  );
-
   return (
     <>
       <Head>
@@ -109,11 +104,7 @@ export default function Home({ pageData }: HomePageType) {
       
       "
       >
-        <section
-          className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5
-        
-        "
-        >
+        <section className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5">
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="grid items-center grid-cols-1 md:grid-cols-2">
               <div>
@@ -289,7 +280,6 @@ export default function Home({ pageData }: HomePageType) {
 
 export async function getStaticProps() {
   const response = await getPageData();
-  console.log(response);
 
   return {
     props: {

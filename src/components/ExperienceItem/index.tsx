@@ -51,13 +51,14 @@ export const ExperienceItem = ({ experience }: ExperienceItemProps) => {
     <Timeline.Item>
       <Timeline.Point />
       <Timeline.Content>
-        <Timeline.Time>
-          {formattedStartDate} - {formattedEndDate} - {formattedDuration}
-        </Timeline.Time>
         <Timeline.Title className="text-4xl leading-7 mt-5 font-medium text-cornflower-blue mb-3 uppercase">
           {role}
         </Timeline.Title>
         <Timeline.Title>{companyName}</Timeline.Title>
+        <Timeline.Time>
+          {formattedStartDate} - {formattedEndDate} - {formattedDuration}
+        </Timeline.Time>
+
         <Timeline.Body>
           <RichText content={description.raw} />
           <br />
