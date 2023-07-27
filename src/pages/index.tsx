@@ -4,9 +4,7 @@ import { FaReact } from "react-icons/fa";
 import { Timeline } from "flowbite-react";
 import Link from "next/link";
 import Card from "@/components/Card";
-
 import { AiOutlineMail } from "react-icons/ai";
-
 import Badge from "@/components/Badge";
 import SectionTitle from "@/components/SectionTitle";
 import { HorizontalDivider } from "@/components/HorizontalDivider";
