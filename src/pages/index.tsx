@@ -1,42 +1,96 @@
 import Image from "next/image";
 import Head from "next/head";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaFilePdf,
-  FaReact,
-  FaMale,
-} from "react-icons/fa";
-import { Button, Timeline, Tooltip } from "flowbite-react";
+import { FaReact } from "react-icons/fa";
+import { Timeline } from "flowbite-react";
 import Link from "next/link";
 import Card from "@/components/Card";
-import {
-  SiAuth0,
-  SiCsharp,
-  SiFigma,
-  SiGit,
-  SiJavascript,
-  SiJest,
-  SiMaterialdesign,
-  SiMysql,
-  SiNextdotjs,
-  SiPostgresql,
-  SiPython,
-  SiReacthookform,
-  SiReactquery,
-  SiReactrouter,
-  SiRedux,
-  SiSqlite,
-  SiStyledcomponents,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
+import { AiOutlineMail } from "react-icons/ai";
 import Badge from "@/components/Badge";
 import SectionTitle from "@/components/SectionTitle";
 import { HorizontalDivider } from "@/components/HorizontalDivider";
 import { ProjectCard } from "@/components/ProjectCard";
+import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
+import { HomePageType } from "@/types/page-info";
+import { RichText } from "@/components/rich-text";
+import { ButtonCopy } from "@/components/Button";
+import { SocialIcon } from "@/components/SocialIcon";
+import { ExperienceItem } from "@/components/ExperienceItem";
 
-export default function Home() {
+const getPageData = async () => {
+  const query = `
+query Assets {
+  page(where: {slug: "home"}) {
+    introduction {
+      raw
+    }
+    knowTechs {
+      iconSvg
+      name
+      startDate
+    }
+    technologies {
+      name
+    }
+    socials {
+      name
+      url
+      iconSvg
+    }
+    profilePicture {
+      url
+    }
+    highlightProjects {
+      slug
+      thumbnail {
+        url
+      }
+      title
+      shortDescription
+      technologies {
+        name
+      }
+      sections {
+        image {
+          url
+        }
+      }
+      gitHubUrl
+      liveProjectUrl
+    }
+  }
+  workExperiences {
+    companyName
+    companyUrl
+    endDate
+    startDate
+    description {
+      raw
+    }
+    role
+    technologies {
+      name
+    }
+    companyLogo {
+      id
+    }
+  }
+}
+  `;
+
+  return fetchHygraphQuery(query, 60 * 60 * 24);
+};
+
+export default function Home({ pageData }: HomePageType) {
+  const {
+    introduction,
+    knowTechs,
+    technologies,
+    socials,
+    profilePicture,
+    highlightProjects,
+  } = pageData.page;
+  const { workExperiences } = pageData;
+
   return (
     <>
       <Head>
@@ -50,11 +104,7 @@ export default function Home() {
       
       "
       >
-        <section
-          className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5
-        
-        "
-        >
+        <section className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5">
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="grid items-center grid-cols-1 md:grid-cols-2">
               <div>
@@ -68,37 +118,41 @@ export default function Home() {
                     Meu nome é Giulianno
                   </span>
                 </h2>
-                <p
+                <div
                   className="max-w-lg mt-3 text-2xl leading-relaxed  md:mt-8 text-gray-50 font-light
                 "
                 >
-                  Tenho 22 anos, sou desenvolvedor front-end com 2 anos de
-                  experiência. Trabalho como freelancer e estou sempre aberto a
-                  novas oportunidades.
-                </p>
+                  <RichText content={introduction.raw} />
+                </div>
+                <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px] my-3">
+                  {technologies?.map((tech) => (
+                    <Badge key={tech.name} className="text-gray-50 bg-blue-400">
+                      {tech.name}
+                    </Badge>
+                  ))}
+                </div>
 
                 <div className="mt-8 flex gap-4 items-center justify-start ">
-                  <Tooltip content="Github" placement="bottom">
-                    <Link href="https://www.github.com/Giuzntt" target="_blank">
-                      <FaGithub className="text-4xl text-gray-50 cursor-pointer hover:text-gray-950 transition-all duration-200" />
-                    </Link>
-                  </Tooltip>
-                  <Tooltip content="LinkedIn" placement="bottom">
-                    <Link
-                      href="https://www.linkedin.com/in/giulianno-zanetti/"
+                  {socials?.map((social) => (
+                    <SocialIcon
+                      key={`social-${social.name}`}
+                      nameSocial={social.name}
+                      icon={social.iconSvg}
                       target="_blank"
-                    >
-                      <FaLinkedin className="text-4xl text-gray-50 cursor-pointer hover:text-linkedin-blue transition-all duration-200" />
-                    </Link>
-                  </Tooltip>
-                  <Tooltip content="Meu Currículo" placement="bottom">
-                    <Link
-                      href="https://drive.google.com/file/d/1HsjjexYlam_abBI4TBxQqTkNkgHSGON_/view?usp=sharing"
-                      target="_blank"
-                    >
-                      <FaFilePdf className="text-4xl text-gray-50 cursor-pointer hover:text-red-600 transition-all duration-200" />
-                    </Link>
-                  </Tooltip>
+                      href={social.url}
+                      placement="bottom"
+                    />
+                  ))}
+                </div>
+
+                <div className="w-full flex justify-start mt-5  flex-col">
+                  <h3 className="text-2xl  leading-tight text-white font-semibold">
+                    Me mande um e-mail
+                  </h3>
+
+                  <ButtonCopy icon={<AiOutlineMail />} copy="giuzntt@gmail.com">
+                    giuzntt@gmail.com
+                  </ButtonCopy>
                 </div>
               </div>
 
@@ -112,8 +166,8 @@ export default function Home() {
                 />
                 <Image
                   className="absolute inset-x-0 bottom-0  -translate-x-1/2 left-1/2"
-                  src="/giulianno.png"
-                  alt=""
+                  src={profilePicture.url}
+                  alt="Profile Image of Giulianno"
                   width={800}
                   height={800}
                 />
@@ -140,122 +194,49 @@ export default function Home() {
             y2="119.445"
             gradientUnits="userSpaceOnUse"
           >
-            AEB8FE
-            <stop stop-color="#8E9FFD" />
-            <stop offset="1" stop-color="#8E9FFD" />
+            <stop stopColor="#8E9FFD" />
+            <stop offset="1" stopColor="#8E9FFD" />
           </linearGradient>
         </defs>
       </svg>
 
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle title="Projetos em destaque" />
+          <div className="flex items-center justify-between">
+            <SectionTitle title="Projetos em destaque" />
+            <Link
+              href={"/"}
+              className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
+            >
+              Ver todos os projetos
+            </Link>
+          </div>
+
           <HorizontalDivider className="mb-16" />
 
           <div>
-            <ProjectCard
-              title="Feneco Talent"
-              src="feneco.jpg"
-              description="Plataforma de gerenciamento de talentos, onde é possível criar um perfil, adicionar projetos e habilidades, e se conectar com outros usuários."
-              badges={[
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiMaterialdesign className="text-xl" />,
-                  nameIcon: "Material UI",
-                },
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-              ]}
-              linkRepository="https://feneco.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/Feneco"
-            />
-            <HorizontalDivider className="mb-16" />
-            <ProjectCard
-              title="MINHAS .HQS"
-              src="minhasHQS.jpg"
-              description="Aplicação web que consome a API da Marvel, onde é possível pesquisar por personagens e HQ's, e adicionar HQ's aos favoritos."
-              badges={[
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiRedux className="text-xl" />,
-                  nameIcon: "Redux",
-                },
-                {
-                  icon: <SiTailwindcss className="text-xl" />,
-                  nameIcon: "TailwindCSS",
-                },
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-              ]}
-              linkRepository="https://desafio-m-ind-thru.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/Desafio-MIndThru"
-            />
-
-            <HorizontalDivider className="mb-16" />
-
-            <ProjectCard
-              title="Easy Courrier"
-              src="easyCourrier2.jpg"
-              description="Desafio Processo Seletivo: Buscar o rastreio  de uma encomenda e exibir o status atual via API REST."
-              badges={[
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiStyledcomponents className="text-xl" />,
-                  nameIcon: "Styled Components",
-                },
-                {
-                  icon: <FaReact className="text-xl" />,
-                  nameIcon: "Context API",
-                },
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-                {
-                  icon: <SiReactrouter className="text-xl" />,
-                  nameIcon: "React Router",
-                },
-              ]}
-              linkRepository="https://projeto-easy-courrier.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/Projeto-Easy-Courrier"
-            />
-
-            <HorizontalDivider className="mb-16" />
-            <ProjectCard
-              title="Dev Journey"
-              src="devjourney.jpg"
-              description="Desafio Processo Seletivo: Criar uma Landing Page responsiva com o tema Dev Journey, página de viagens para desenvolvedores."
-              badges={[
-                {
-                  icon: <SiNextdotjs className="text-xl" />,
-                  nameIcon: "React",
-                },
-                {
-                  icon: <SiTailwindcss className="text-xl" />,
-                  nameIcon: "TailwindCSS",
-                },
-
-                {
-                  icon: <SiTypescript className="text-xl" />,
-                  nameIcon: "Typescript",
-                },
-              ]}
-              linkRepository="https://desafio-wizzi-phi.vercel.app/"
-              linkGithub="https://github.com/Giuzntt/desafio-wizzi"
-            />
+            {highlightProjects?.map((project) => (
+              <div key={`project-${project.title}`}>
+                <ProjectCard
+                  title={project.title}
+                  src={project.thumbnail.url}
+                  description={project.shortDescription}
+                  badges={project.technologies.map((tech) => ({
+                    icon: (
+                      <FaReact
+                        key={`project-${project.title}-${tech.name}`}
+                        className="text-xl"
+                      />
+                    ),
+                    nameIcon: tech.name,
+                  }))}
+                  linkRepository={project.liveProjectUrl}
+                  linkGithub={project.gitHubUrl}
+                  href={project.slug}
+                />
+                <HorizontalDivider className="mb-16" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -270,70 +251,14 @@ export default function Home() {
           gap-5 mt-8"
           >
             {/* create card */}
-            <Card
-              icon={<FaReact className="text-4xl text-blue-500 mx-auto mt-5" />}
-              skill="React"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={<SiRedux className="text-4xl text-redux mx-auto mt-5" />}
-              skill="Redux"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={
-                <SiNextdotjs className="text-4xl text-gray-950 mx-auto mt-5" />
-              }
-              skill="Next.js"
-              time="+1 ano de experiência"
-            />
-            <Card
-              icon={
-                <SiTypescript className="text-4xl text-blue-400 mx-auto mt-5" />
-              }
-              skill="Typescript"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={
-                <SiJavascript className="text-4xl text-yellow-300 mx-auto mt-5" />
-              }
-              skill="Javascript"
-              time="+2 anos de experiência"
-            />
-            <Card
-              icon={
-                <SiTailwindcss className="text-4xl text-cyan-300 mx-auto mt-5" />
-              }
-              skill="TailwindCSS"
-              time="+1 ano de experiência"
-            />
-
-            <Card
-              skill="GIT"
-              time="+2 anos de experiência"
-              icon={<SiGit className="text-4xl text-orange-400 mx-auto mt-5" />}
-            />
-
-            <Card
-              icon={<SiMysql className="text-4xl text-gray-950 mx-auto mt-5" />}
-              skill="MySQL"
-              time="+1 ano de experiência"
-            />
-            <Card
-              icon={
-                <SiPython className="text-4xl text-gray-950 mx-auto mt-5" />
-              }
-              skill="Python"
-              time="+1 ano de experiência"
-            />
-            <Card
-              icon={
-                <SiPostgresql className="text-4xl text-gray-950 mx-auto mt-5" />
-              }
-              skill="PostgreSQL"
-              time="+1 ano de experiência"
-            />
+            {knowTechs?.map((tech) => (
+              <Card
+                key={tech.name}
+                icon={tech.iconSvg}
+                skill={tech.name}
+                time={tech.startDate}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -341,156 +266,24 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Experiência Profissional" />
           <Timeline>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Dezembro de 2022 - Maio de 2023</Timeline.Time>
-                <Timeline.Title>INTRABANK - Desenvolvedor JR.</Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    Contribui com o desenvolvimento de uma plataforma de gestão
-                    de processos de análise de crédito, seguindo em visões de
-                    Compliance, Comercial e Crédito. A automação das etapas do
-                    processo de análise de crédito, desde a coleta de
-                    informações até a avaliação de risco e a aprovação de
-                    crédito. Incluindo contribui na integração de um OCR que
-                    atualizava e acompanhava em tempo real o processamento dos
-                    arquivos.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge icon={<FaReact className="text-xl" />}>
-                      React.JS
-                    </Badge>
-                    <Badge icon={<SiRedux className="text-xl" />}>
-                      Redux.js
-                    </Badge>
-                    <Badge icon={<SiTailwindcss className="text-xl" />}>
-                      TailwindCSS
-                    </Badge>
-                    <Badge icon={<SiTypescript className="text-xl" />}>
-                      Typescript
-                    </Badge>
-                    <Badge icon={<SiJavascript className="text-xl" />}>
-                      Javascript
-                    </Badge>
-                    <Badge icon={<SiPostgresql className="text-xl" />}>
-                      PostgreSQL
-                    </Badge>
-                    <Badge icon={<SiReactquery className="text-xl" />}>
-                      React Query (Cache)
-                    </Badge>
-                    <Badge icon={<SiAuth0 className="text-xl" />}>Auth0</Badge>
-                    <Badge icon={<SiCsharp className="text-xl" />}>C#</Badge>
-                    <Badge icon={<SiJest className="text-xl" />}>Jest</Badge>
-                    <Badge icon={<SiFigma className="text-xl" />}>Figma</Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Junho de 2022 - Dezembro de 2022</Timeline.Time>
-                <Timeline.Title>MANAGEMENT SOLUTIONS -Trainee</Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    A utilização do Python para processamento e análise de dados
-                    com persistência SQL. A criação de uma interface gráfica em
-                    ReactJS.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge icon={<FaReact className="text-xl" />}>
-                      React.JS
-                    </Badge>
-
-                    <Badge icon={<SiPython className="text-xl" />}>
-                      Python
-                    </Badge>
-                    <Badge icon={<SiJavascript className="text-xl" />}>
-                      Javascript
-                    </Badge>
-                    <Badge icon={<SiSqlite className="text-xl" />}>
-                      SQLite
-                    </Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Outubro de 2021 - Abril de 2022</Timeline.Time>
-                <Timeline.Title>
-                  GRUPO MULTIPLICA - Estágio em Desenvolvimento Front-end
-                </Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    Contribui na construção de um sistema para a automação de
-                    processos internos da empresa.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge icon={<FaReact className="text-xl" />}>
-                      React.JS
-                    </Badge>
-                    <Badge icon={<SiRedux className="text-xl" />}>
-                      Redux.js
-                    </Badge>
-                    <Badge icon={<SiTailwindcss className="text-xl" />}>
-                      TailwindCSS
-                    </Badge>
-                    <Badge icon={<SiTypescript className="text-xl" />}>
-                      Typescript
-                    </Badge>
-                    <Badge icon={<SiJavascript className="text-xl" />}>
-                      Javascript
-                    </Badge>
-                    <Badge icon={<SiReacthookform className="text-xl" />}>
-                      React Hook Form
-                    </Badge>
-                    <Badge icon={<SiJest className="text-xl" />}>Jest</Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
-            <Timeline.Item>
-              <Timeline.Point />
-              <Timeline.Content>
-                <Timeline.Time>Agosto de 2021 - Outubro de 2021</Timeline.Time>
-                <Timeline.Title>FIAP - Estágio em Suporte de TI</Timeline.Title>
-                <Timeline.Body>
-                  <p className="text-gray-500 text-lg leading-7">
-                    Estagio na área de monitoria, onde auxiliava os professores
-                    durante as aulas e prestava suporte no funcionamento das
-                    máquinas dos laboratórios.
-                    <br />
-                  </p>
-                  <h4 className=" text-lg leading-7 mt-5 font-medium text-gray-950 mb-3">
-                    Tecnologias Utilizadas:
-                  </h4>
-
-                  <div className="flex flex-wrap gap-2 ">
-                    <Badge>Nenhuma</Badge>
-                  </div>
-                </Timeline.Body>
-              </Timeline.Content>
-            </Timeline.Item>
+            {workExperiences?.map((work) => (
+              <div key={`work-${work.companyName}`}>
+                <ExperienceItem experience={work} />
+              </div>
+            ))}
           </Timeline>
         </div>
       </section>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const response = await getPageData();
+
+  return {
+    props: {
+      pageData: response,
+    },
+  };
 }

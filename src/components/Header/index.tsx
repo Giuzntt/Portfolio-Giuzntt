@@ -13,6 +13,10 @@ const NAV_ITEMS: NavItem[] = [
     label: "Sobre mim",
     href: "/",
   },
+  {
+    label: "Projetos",
+    href: "/Projects",
+  },
 ];
 
 const Header = () => {

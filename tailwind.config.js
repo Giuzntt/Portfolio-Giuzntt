@@ -17,12 +17,17 @@ module.exports = {
       },
       colors: {
         "persian-indigo": "#27187E",
+        "cornflower-blue-light": "#ACB9FF",
         "cornflower-blue": "#758BFD",
         "periwinkle-blue": "#AEB8FE",
         "flash-white": "#F1F2F6",
         "orange-ut": "#FF8600",
         "linkedin-blue": "#0A66C2",
         redux: "#764ABC",
+      },
+
+      spacing: {
+        "3/4": "133.33%", // For a 3:4 aspect ratio
       },
     },
   },

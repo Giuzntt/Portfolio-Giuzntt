@@ -6,7 +6,6 @@ import { Tooltip } from "flowbite-react";
 import { TbWorldWww } from "react-icons/tb";
 
 interface ProjectCardProps {
-  className?: string;
   title?: string;
   description?: string;
 
@@ -17,16 +16,17 @@ interface ProjectCardProps {
   }[];
   linkGithub?: string;
   linkRepository?: string;
+  href?: string;
 }
 
 export const ProjectCard = ({
-  className,
   title,
   description,
   badges,
   src,
   linkGithub = "/",
   linkRepository = "/",
+  href = "/",
 }: ProjectCardProps) => {
   return (
     <div className="flex gap-6 lg:gap-5 flex-col lg:flex-row my-5">
@@ -35,11 +35,11 @@ export const ProjectCard = ({
       "
       >
         <Image
-          src={`/${src}`}
-          width={569}
-          height={300}
+          src={`${src}`}
+          width={300}
+          height={400}
           alt="ProjectCard"
-          className=" w-full  h-[200px]  sm:h-[300px] lg:w-[400px] 
+          className="w-full h-full  sm:h-[300px] lg:w-[400px] 
           
           lg:min-h-full object-cover rounded-lg"
         />
@@ -73,6 +73,15 @@ export const ProjectCard = ({
             <Tooltip content="Ver Repositório" placement="bottom">
               <FaGithub className="text-4xl text-cornflower-blue" />
             </Tooltip>
+          </Link>
+        </div>
+
+        <div className="my-5 flex items-end justify-end">
+          <Link
+            href={`/projects/${href}`}
+            className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
+          >
+            Ir para o projeto
           </Link>
         </div>
       </div>
