@@ -4,6 +4,7 @@ import { Project, SectionProject } from "@/types/page-info";
 import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
@@ -56,6 +57,9 @@ const Projects = ({ pageDetails }: { pageDetails: PageDetails | null }) => {
       <section>
         {projects.map((project) => (
           <Fragment key={project.slug}>
+            <Head>
+              <title>Portfólio | {project.title}</title>
+            </Head>
             <div className="relative items-center w-full px-5 py-24 mx-auto md:px-12 lg:px-16 max-w-7xl">
               <div className="relative flex-col items-start m-auto align-middle">
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-24">
