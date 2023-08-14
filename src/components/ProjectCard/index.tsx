@@ -78,7 +78,7 @@ export const ProjectCard = ({
 
         <div className="my-5 flex items-end justify-end">
           <Link
-            href={`/projects/${href}`}
+            href={`/Projects/${href}`}
             className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
           >
             Ir para o projeto

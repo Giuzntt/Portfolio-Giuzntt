@@ -1,9 +1,5 @@
-import { cn } from "@/lib/utils";
 import { Tooltip } from "flowbite-react";
 import Link from "next/link";
-import { ReactNode } from "react";
-import { Fa500Px } from "react-icons/fa";
-import { IconType } from "react-icons/lib";
 import { CMSIcon } from "../cms-icon";
 
 type SocialIconProps = {
@@ -16,7 +12,6 @@ type SocialIconProps = {
 };
 
 export const SocialIcon = ({
-  className,
   nameSocial,
   icon,
   href,
@@ -26,7 +21,7 @@ export const SocialIcon = ({
   return (
     <Tooltip content={nameSocial} placement={placement}>
       <Link href={href} target={target}>
-        <CMSIcon icon={icon} className={className} />
+        <CMSIcon icon={icon} className={"text-4xl"} />
       </Link>
     </Tooltip>
   );
