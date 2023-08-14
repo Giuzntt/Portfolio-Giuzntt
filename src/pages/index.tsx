@@ -30,6 +30,7 @@ query Assets {
     }
     technologies {
       name
+      iconSvg
     }
     socials {
       name
@@ -48,6 +49,7 @@ query Assets {
       shortDescription
       technologies {
         name
+        iconSvg
       }
       sections {
         image {
@@ -69,6 +71,7 @@ query Assets {
     role
     technologies {
       name
+      iconSvg
     }
     companyLogo {
       id
@@ -94,12 +97,12 @@ export default function Home({ pageData }: HomePageType) {
   return (
     <>
       <Head>
-        <title>Meu Portifolio</title>
+        <title>Portfólio | Home</title>
       </Head>
 
       <main
         className=" flex flex-col items-center justify-center w-full h-full 
-         bg-gradient-to-r from-cornflower-blue to-periwinkle-blue  bg-no-repeat bg-cover mt-5
+         bg-gradient-to-r from-cornflower-blue to-periwinkle-blue  bg-no-repeat bg-cover mt-10
 
       
       "
@@ -126,7 +129,11 @@ export default function Home({ pageData }: HomePageType) {
                 </div>
                 <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px] my-3">
                   {technologies?.map((tech) => (
-                    <Badge key={tech.name} className="text-gray-50 bg-blue-400">
+                    <Badge
+                      key={tech.name}
+                      className="text-gray-50 bg-blue-400"
+                      icon={tech.iconSvg}
+                    >
                       {tech.name}
                     </Badge>
                   ))}
@@ -205,7 +212,7 @@ export default function Home({ pageData }: HomePageType) {
           <div className="flex items-center justify-between">
             <SectionTitle title="Projetos em destaque" />
             <Link
-              href={"/"}
+              href={"/Projects"}
               className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
             >
               Ver todos os projetos
@@ -222,12 +229,7 @@ export default function Home({ pageData }: HomePageType) {
                   src={project.thumbnail.url}
                   description={project.shortDescription}
                   badges={project.technologies.map((tech) => ({
-                    icon: (
-                      <FaReact
-                        key={`project-${project.title}-${tech.name}`}
-                        className="text-xl"
-                      />
-                    ),
+                    icon: tech.iconSvg,
                     nameIcon: tech.name,
                   }))}
                   linkRepository={project.liveProjectUrl}

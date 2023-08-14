@@ -69,7 +69,9 @@ export const ExperienceItem = ({ experience }: ExperienceItemProps) => {
 
           <div className="flex flex-wrap gap-2 ">
             {technologies?.map((tech) => (
-              <Badge key={`tech-${tech.name}`}>{tech.name}</Badge>
+              <Badge key={`tech-${tech.name}`} icon={tech.iconSvg}>
+                {tech.name}
+              </Badge>
             ))}
           </div>
         </Timeline.Body>

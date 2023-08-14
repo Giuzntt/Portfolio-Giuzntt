@@ -1,7 +1,8 @@
+import { CMSIcon } from "../cms-icon";
 import { cn } from "./../../lib/utils";
 
 interface BadgeProps {
-  icon?: React.ReactNode;
+  icon: string;
   children?: React.ReactNode;
   className?: string;
 }
@@ -14,7 +15,8 @@ const Badge = ({ icon, children, className }: BadgeProps) => {
         className
       )}
     >
-      {icon}
+      <CMSIcon icon={icon} />
+
       {children}
     </span>
   );

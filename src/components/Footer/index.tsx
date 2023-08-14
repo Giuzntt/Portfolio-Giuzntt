@@ -41,6 +41,7 @@ export const Footer = () => {
                 href="https://github.com/Giuzntt"
                 className="mx-2 text-blue-500 hover:text-gray-500"
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 @giuzntt
               </Link>

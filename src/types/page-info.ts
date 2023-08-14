@@ -19,6 +19,14 @@ export type Profile = {
 
 export type Technologies = {
   name: string;
+  iconSvg: string;
+};
+
+export type SectionProject = {
+  title: string;
+  image: {
+    url: string;
+  };
 };
 
 export type Project = {
@@ -28,10 +36,13 @@ export type Project = {
   };
   title: string;
   shortDescription: string;
-  description: string;
+  description: {
+    raw: RichTextContent;
+  };
   technologies: Technologies[];
   liveProjectUrl: string;
   gitHubUrl: string;
+  sections: SectionProject[];
 };
 
 export type HomePageInfo = {

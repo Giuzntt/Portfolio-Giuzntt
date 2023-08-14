@@ -3,7 +3,6 @@ import { ProjectCard } from "@/components/ProjectCard";
 import SectionTitle from "@/components/SectionTitle";
 import { Project } from "@/types/page-info";
 import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
-import { FaReact } from "react-icons/fa";
 
 interface PageData {
   page: {
@@ -29,6 +28,7 @@ const getPageData = async (): Promise<PageData> => {
     liveProjectUrl
     technologies {
       name
+      iconSvg
     }
     thumbnail {
       url
@@ -52,13 +52,11 @@ type ProjectsProps = {
 };
 
 export default function Projects({ highlightProjects }: ProjectsProps) {
-  console.log(highlightProjects);
   return (
-    <section className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl flex items-center justify-center flex-col mt-5">
-        <SectionTitle title="Projetos" />
-
+    <section className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5 ">
+      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl flex items-center justify-center flex-col mt-10 w-full h-screen">
         <div>
+          <SectionTitle title="Projetos" />
           {highlightProjects?.map((project) => (
             <div key={`project-${project.title}`}>
               <ProjectCard
@@ -66,17 +64,12 @@ export default function Projects({ highlightProjects }: ProjectsProps) {
                 src={project.thumbnail.url}
                 description={project.shortDescription}
                 badges={project.technologies.map((tech) => ({
-                  icon: (
-                    <FaReact
-                      key={`project-${project.title}-${tech.name}`}
-                      className="text-xl"
-                    />
-                  ),
+                  icon: tech.iconSvg,
                   nameIcon: tech.name,
                 }))}
                 linkRepository={project.liveProjectUrl}
                 linkGithub={project.gitHubUrl}
-                href={project.slug}
+                href={`${project.slug}`}
               />
               <HorizontalDivider className="mb-16" />
             </div>
@@ -89,7 +82,6 @@ export default function Projects({ highlightProjects }: ProjectsProps) {
 
 export async function getStaticProps() {
   const response = await getPageData();
-  console.log(response);
 
   return {
     props: {
