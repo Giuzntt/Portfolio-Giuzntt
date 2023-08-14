@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Head from "next/head";
-import { FaReact } from "react-icons/fa";
 import { Timeline } from "flowbite-react";
 import Link from "next/link";
 import Card from "@/components/Card";
