@@ -1,5 +1,4 @@
 import Badge from "@/components/Badge";
-import SectionTitle from "@/components/SectionTitle";
 import { Project, SectionProject } from "@/types/page-info";
 import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
 import { RichText } from "@graphcms/rich-text-react-renderer";
