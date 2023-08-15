@@ -60,7 +60,7 @@ export default function Projects({ highlightProjects }: ProjectsProps) {
       </Head>
 
       <section className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5 ">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl flex items-center justify-center flex-col mt-10 w-full h-screen my-25">
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl flex items-center justify-center flex-col mt-10 w-full h-full my-25">
           <div>
             <SectionTitle title="Projetos" />
             {highlightProjects?.map((project) => (
