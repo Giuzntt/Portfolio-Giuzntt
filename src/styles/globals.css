@@ -5,3 +5,24 @@
 body {
   background-color: #f9fafb;
 }
+
+/* Personalize scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #acb9ff; /* color of the scroll thumb */
+  border-radius: 6px; /* roundness of the scroll thumb */
+  border: 3px solid #c4c3c3; /* creates padding around scroll thumb */
+}
+
+/* Personalize scrollbar for Firefox */
+* {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #acb9ff #acb9ff; /* thumb and track color */
+}

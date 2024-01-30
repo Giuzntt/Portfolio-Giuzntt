@@ -1,19 +1,19 @@
-import Image from "next/image";
-import Head from "next/head";
-import { Timeline } from "flowbite-react";
-import Link from "next/link";
-import Card from "@/components/Card";
-import { AiOutlineMail } from "react-icons/ai";
-import Badge from "@/components/Badge";
-import SectionTitle from "@/components/SectionTitle";
-import { HorizontalDivider } from "@/components/HorizontalDivider";
-import { ProjectCard } from "@/components/ProjectCard";
-import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
-import { HomePageType } from "@/types/page-info";
-import { RichText } from "@/components/rich-text";
-import { ButtonCopy } from "@/components/Button";
-import { SocialIcon } from "@/components/SocialIcon";
-import { ExperienceItem } from "@/components/ExperienceItem";
+import Image from 'next/image';
+import Head from 'next/head';
+import { Timeline } from 'flowbite-react';
+import Link from 'next/link';
+import Card from '@/components/Card';
+import { AiOutlineMail } from 'react-icons/ai';
+import Badge from '@/components/Badge';
+import SectionTitle from '@/components/SectionTitle';
+import { HorizontalDivider } from '@/components/HorizontalDivider';
+import { ProjectCard } from '@/components/ProjectCard';
+import { fetchHygraphQuery } from '@/utils/fetch-hygraph-query';
+import { HomePageType } from '@/types/page-info';
+import { RichText } from '@/components/rich-text';
+import { ButtonCopy } from '@/components/Button';
+import { SocialIcon } from '@/components/SocialIcon';
+import { ExperienceItem } from '@/components/ExperienceItem';
 
 const getPageData = async () => {
   const query = `
@@ -72,6 +72,7 @@ query Assets {
       name
       iconSvg
     }
+    order
     companyLogo {
       id
     }
@@ -92,6 +93,9 @@ export default function Home({ pageData }: HomePageType) {
     highlightProjects,
   } = pageData.page;
   const { workExperiences } = pageData;
+  {
+    console.log(workExperiences.sort((a, b) => b.order - a.order));
+  }
 
   return (
     <>
@@ -211,7 +215,7 @@ export default function Home({ pageData }: HomePageType) {
           <div className="flex items-center justify-between">
             <SectionTitle title="Projetos em destaque" />
             <Link
-              href={"/Projects"}
+              href={'/Projects'}
               className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
             >
               Ver todos os projetos
@@ -267,11 +271,13 @@ export default function Home({ pageData }: HomePageType) {
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Experiência Profissional" />
           <Timeline>
-            {workExperiences?.map((work) => (
-              <div key={`work-${work.companyName}`}>
-                <ExperienceItem experience={work} />
-              </div>
-            ))}
+            {workExperiences
+              ?.sort((a, b) => b.order - a.order)
+              ?.map((work) => (
+                <div key={`work-${work.companyName}`}>
+                  <ExperienceItem experience={work} />
+                </div>
+              ))}
           </Timeline>
         </div>
       </section>

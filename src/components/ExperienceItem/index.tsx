@@ -1,9 +1,10 @@
-import { Timeline } from "flowbite-react";
-import { RichText } from "../rich-text";
-import Badge from "../Badge";
-import { WorkExperience } from "@/types/work-experience";
-import { differenceInMonths, differenceInYears, format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { Timeline } from 'flowbite-react';
+import { RichText } from '../rich-text';
+import Badge from '../Badge';
+import { WorkExperience } from '@/types/work-experience';
+import { differenceInMonths, differenceInYears, format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+import { isNil } from 'lodash';
 
 type ExperienceItemProps = {
   experience: WorkExperience;
@@ -23,14 +24,14 @@ export const ExperienceItem = ({ experience }: ExperienceItemProps) => {
   const startDate = new Date(experience.startDate);
   const endDate = new Date(experience.endDate);
 
-  const formattedStartDate = format(startDate, "MMM yyyy", {
+  const formattedStartDate = format(startDate, 'MMM yyyy', {
     locale: ptBR,
   });
-  const formattedEndDate = endDate
-    ? format(endDate, "MMM yyyy", {
+  const formattedEndDate = isNil(experience.endDate)
+    ? 'Atualmente'
+    : format(endDate, 'MMM yyyy', {
         locale: ptBR,
-      })
-    : "Atualmente";
+      });
 
   const end = endDate ? new Date(endDate) : new Date();
 
@@ -40,12 +41,12 @@ export const ExperienceItem = ({ experience }: ExperienceItemProps) => {
 
   const formattedDuration =
     years > 0
-      ? `${years} ano${years > 1 ? "s" : ""}${
+      ? `${years} ano${years > 1 ? 's' : ''}${
           monthsRemaining > 0
-            ? ` e ${monthsRemaining} mes${monthsRemaining > 1 ? "es" : ""}`
-            : ""
+            ? ` e ${monthsRemaining} mes${monthsRemaining > 1 ? 'es' : ''}`
+            : ''
         }`
-      : `${months} mes${months > 1 ? "es" : ""}`;
+      : `${months} mes${months > 1 ? 'es' : ''}`;
 
   return (
     <Timeline.Item>
@@ -56,7 +57,8 @@ export const ExperienceItem = ({ experience }: ExperienceItemProps) => {
         </Timeline.Title>
         <Timeline.Title>{companyName}</Timeline.Title>
         <Timeline.Time>
-          {formattedStartDate} - {formattedEndDate} - {formattedDuration}
+          {formattedStartDate} - {formattedEndDate}{' '}
+          {!isNil(experience.endDate) && '- ' + formattedDuration}
         </Timeline.Time>
 
         <Timeline.Body>

@@ -1,5 +1,5 @@
-import { Technologies } from "./page-info";
-import type { RichTextContent } from "@graphcms/rich-text-types";
+import { Technologies } from './page-info';
+import type { RichTextContent } from '@graphcms/rich-text-types';
 export type WorkExperience = {
   companyName: string;
   role: string;
@@ -10,6 +10,7 @@ export type WorkExperience = {
   description: {
     raw: RichTextContent;
   };
+  order: number;
   startDate: string;
   endDate: string;
   technologies: Technologies[];
