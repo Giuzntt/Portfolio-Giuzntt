@@ -22,7 +22,6 @@ export const ButtonCopy = ({
     if (copy) {
       navigator.clipboard.writeText(copy).then(
         () => {
-          console.log("Text copied:", copy);
           setIsCopied(true);
           setTimeout(() => {
             setIsCopied(false);

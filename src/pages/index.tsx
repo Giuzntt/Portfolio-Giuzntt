@@ -1,19 +1,20 @@
-import Image from 'next/image';
-import Head from 'next/head';
-import { Timeline } from 'flowbite-react';
-import Link from 'next/link';
-import Card from '@/components/Card';
-import { AiOutlineMail } from 'react-icons/ai';
-import Badge from '@/components/Badge';
-import SectionTitle from '@/components/SectionTitle';
-import { HorizontalDivider } from '@/components/HorizontalDivider';
-import { ProjectCard } from '@/components/ProjectCard';
-import { fetchHygraphQuery } from '@/utils/fetch-hygraph-query';
-import { HomePageType } from '@/types/page-info';
-import { RichText } from '@/components/rich-text';
-import { ButtonCopy } from '@/components/Button';
-import { SocialIcon } from '@/components/SocialIcon';
-import { ExperienceItem } from '@/components/ExperienceItem';
+import Image from "next/image";
+import Head from "next/head";
+import { Timeline } from "flowbite-react";
+import Link from "next/link";
+import Card from "@/components/Card";
+import { AiOutlineMail } from "react-icons/ai";
+import Badge from "@/components/Badge";
+import SectionTitle from "@/components/SectionTitle";
+import { HorizontalDivider } from "@/components/HorizontalDivider";
+import { ProjectCard } from "@/components/ProjectCard";
+import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
+import { HomePageType } from "@/types/page-info";
+import { RichText } from "@/components/rich-text";
+import { ButtonCopy } from "@/components/Button";
+import { ExperienceItem } from "@/components/ExperienceItem";
+import { AnimatedTooltip } from "@/components/TooltipAnimated";
+import { TextGenerateEffect } from "@/components/TextAnimated";
 
 const getPageData = async () => {
   const query = `
@@ -93,9 +94,6 @@ export default function Home({ pageData }: HomePageType) {
     highlightProjects,
   } = pageData.page;
   const { workExperiences } = pageData;
-  {
-    console.log(workExperiences.sort((a, b) => b.order - a.order));
-  }
 
   return (
     <>
@@ -119,10 +117,17 @@ export default function Home({ pageData }: HomePageType) {
                   text-gray-50
                 "
                 >
-                  Olá 👋 <br className="block sm:hidden" />
-                  <span className="relative text-md inline-block">
-                    Meu nome é Giulianno
-                  </span>
+                  <TextGenerateEffect
+                    words=" Olá 👋"
+                    className="relative text-md inline-block"
+                  />
+
+                  <br className="block sm:hidden" />
+                  <br className="hidden sm:block" />
+                  <TextGenerateEffect
+                    words="Meu nome é Giulianno"
+                    className="relative text-md inline-block"
+                  />
                 </h2>
                 <div
                   className="max-w-lg mt-3 text-2xl leading-relaxed  md:mt-8 text-gray-50 font-light
@@ -144,18 +149,22 @@ export default function Home({ pageData }: HomePageType) {
 
                 <div className="mt-8 flex gap-4 items-center justify-start ">
                   {socials?.map((social) => (
-                    <SocialIcon
+                    <AnimatedTooltip
                       key={`social-${social.name}`}
-                      nameSocial={social.name}
-                      icon={social.iconSvg}
-                      target="_blank"
-                      href={social.url}
-                      placement="bottom"
+                      items={[
+                        {
+                          id: 1,
+                          name: social.name,
+                          designation: social.name,
+                          image: social.iconSvg,
+                          href: social.url,
+                        },
+                      ]}
                     />
                   ))}
                 </div>
 
-                <div className="w-full flex justify-start mt-5  flex-col">
+                <div className="w-full flex justify-start my-5  flex-col">
                   <h3 className="text-2xl  leading-tight text-white font-semibold">
                     Me mande um e-mail
                   </h3>
@@ -215,7 +224,7 @@ export default function Home({ pageData }: HomePageType) {
           <div className="flex items-center justify-between">
             <SectionTitle title="Projetos em destaque" />
             <Link
-              href={'/Projects'}
+              href={"/Projects"}
               className="text-cornflower-blue hover:text-periwinkle-blue font-semibold text-lg"
             >
               Ver todos os projetos
