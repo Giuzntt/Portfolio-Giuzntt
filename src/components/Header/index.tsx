@@ -3,6 +3,7 @@ import Link from "next/link";
 import { NavItem } from "./nav-item";
 import { useState } from "react";
 import { HiOutlineMenu, HiX } from "react-icons/hi";
+import { motion } from "framer-motion";
 
 type NavItem = {
   label: string;
@@ -27,7 +28,18 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 w-full bg-gradient-to-r from-cornflower-blue to-periwinkle-blue">
+    <motion.header
+      className="fixed inset-x-0 top-0 z-50 w-full bg-gradient-to-r from-cornflower-blue to-periwinkle-blue"
+      initial={{
+        top: -100,
+      }}
+      animate={{
+        top: 0,
+      }}
+      transition={{
+        duration: 0.3,
+      }}
+    >
       <div className="container px-4 mx-auto sm:px-6 lg:px-8 w-full max-w-7xl">
         <div className="flex items-center h-16 lg:h-20 justify-between">
           <div className="flex-shrink-0">
@@ -85,7 +97,7 @@ const Header = () => {
           )}
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

@@ -15,6 +15,7 @@ import { ButtonCopy } from "@/components/Button";
 import { ExperienceItem } from "@/components/ExperienceItem";
 import { AnimatedTooltip } from "@/components/TooltipAnimated";
 import { TextGenerateEffect } from "@/components/TextAnimated";
+import { motion } from "framer-motion";
 
 const getPageData = async () => {
   const query = `
@@ -111,7 +112,12 @@ export default function Home({ pageData }: HomePageType) {
         <section className="container pt-10   md:pt-0 sm:pt-16 2xl:pt-16 mx-auto  w-full h-full sm:mt-5">
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="grid items-center grid-cols-1 md:grid-cols-2">
-              <div>
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 1 }}
+              >
                 <h2
                   className="text-3xl font-bold leading-tight  sm:text-4xl lg:text-5xl
                   text-gray-50
@@ -136,11 +142,15 @@ export default function Home({ pageData }: HomePageType) {
                   <RichText content={introduction.raw} />
                 </div>
                 <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px] my-3">
-                  {technologies?.map((tech) => (
+                  {technologies?.map((tech, index) => (
                     <Badge
-                      key={tech.name}
+                      key={`intro-${tech.name}`}
                       className="text-gray-50 bg-blue-400"
                       icon={tech.iconSvg}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0 }}
+                      transition={{ duration: 0.2, delay: index * 0.1 }}
                     >
                       {tech.name}
                     </Badge>
@@ -173,9 +183,15 @@ export default function Home({ pageData }: HomePageType) {
                     giuzntt@gmail.com
                   </ButtonCopy>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="relative">
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, y: 200, scale: 0.5 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 200, scale: 0.5 }}
+                transition={{ duration: 0.5 }}
+              >
                 <Image
                   className="relative w-full xl:max-w-lg xl:mx-auto 2xl:origin-bottom 2xl:scale-100"
                   src="/blob_indigo.svg"
@@ -190,7 +206,7 @@ export default function Home({ pageData }: HomePageType) {
                   width={800}
                   height={800}
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
