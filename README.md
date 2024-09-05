@@ -1,5 +1,6 @@
 # Projeto Portfólio 🚀
 
+
 ## Quais tecnologias serão utilizadas?
 
 <div  style="display: inline_block"><br>
@@ -13,7 +14,7 @@
     <!-- GRaphQL -->
 <img align="center" alt="Rafa-GraphQL" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg">
     <!-- TailwindCSS -->
-<img align="center" alt="Rafa-Tailwind" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg">
+
 </div>
 
 
