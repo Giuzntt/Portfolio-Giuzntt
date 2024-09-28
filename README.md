@@ -1,7 +1,3 @@
-Aqui está uma versão melhorada do README para o seu projeto de portfólio:
-
----
-
 # Projeto Portfólio 🚀
 
 Este é o repositório do meu portfólio pessoal, desenvolvido para apresentar minhas habilidades como desenvolvedor e os projetos que já desenvolvi ao longo da minha jornada. O objetivo é ter uma plataforma dinâmica, moderna e otimizada para mostrar meu trabalho de forma eficaz.
