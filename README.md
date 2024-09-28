@@ -44,27 +44,30 @@ Para rodar o projeto na sua máquina, siga os passos abaixo:
 
 1. Clone o repositório:
     ```bash
-    git clone https://github.com/seu-usuario/portfolio.git
+    git clone https://github.com/Giuzntt/Portfolio-Giuzntt.git
     ```
 
 2. Entre no diretório do projeto:
     ```bash
-    cd portfolio
+    cd Portfolio-Giuzntt
     ```
 
 3. Instale as dependências:
     ```bash
-    npm install
+    yarn install
     ```
 
 4. Crie um arquivo `.env.local` e adicione suas variáveis de ambiente, se necessário:
     ```bash
     DISCORD_WEBHOOK_URL=your_discord_webhook_url
+    HYGRAPH_URL=hygraph url
+    HYGRAPH_TOKEN=hygraph token
+    
     ```
 
 5. Execute o servidor de desenvolvimento:
     ```bash
-    npm run dev
+    yarn dev
     ```
 
 6. Acesse o projeto em: `http://localhost:3000`
