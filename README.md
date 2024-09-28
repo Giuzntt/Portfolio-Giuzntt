@@ -13,24 +13,22 @@ Este projeto foi construído utilizando as seguintes tecnologias:
 <div style="display: inline_block"><br>
     <!-- Next.js -->
     <img align="center" alt="Next.js" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"> 
-    **Next.js** - Framework React para produção e fácil configuração de SSR (Server-Side Rendering).
+    Next.js - Framework React para produção e fácil configuração de SSR (Server-Side Rendering).
     <br/>
     <!-- React -->
     <img align="center" alt="React" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"> 
-    **React** - Biblioteca JavaScript para construir interfaces de usuário de forma eficiente e declarativa.
+    React - Biblioteca JavaScript para construir interfaces de usuário de forma eficiente e declarativa.
     <br/>
     <!-- TypeScript -->
     <img align="center" alt="TypeScript" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"> 
-    **TypeScript** - Superset do JavaScript que adiciona tipagem estática, ajudando a prevenir erros durante o desenvolvimento.
+    TypeScript - Superset do JavaScript que adiciona tipagem estática, ajudando a prevenir erros durante o desenvolvimento.
     <br/>
     <!-- GraphQL -->
     <img align="center" alt="GraphQL" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg"> 
-    **GraphQL** - Linguagem de consulta para APIs que oferece flexibilidade ao solicitar apenas os dados necessários.
+    GraphQL - Linguagem de consulta para APIs que oferece flexibilidade ao solicitar apenas os dados necessários.
     <br/>
     <!-- TailwindCSS -->
-    <img align="center" alt="TailwindCSS" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg">
-    **TailwindCSS** - Framework de CSS utilitário que permite criar layouts customizados de maneira rápida e eficiente.
-    <br/>
+   
 </div>
 
 ## Funcionalidades
