@@ -6,9 +6,7 @@ export default function Document() {
       <Head></Head>
       <body>
         <Main />
-        {/* get poppins all sizes */}
-
-        <NextScript />
+     <NextScript />
       </body>
     </Html>
   );

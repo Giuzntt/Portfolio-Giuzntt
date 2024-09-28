@@ -52,7 +52,7 @@ export const ExperienceItem = ({ experience }: ExperienceItemProps) => {
     <Timeline.Item>
       <Timeline.Point />
       <Timeline.Content>
-        <Timeline.Title className="text-4xl leading-7 mt-5 font-medium text-cornflower-blue mb-3 uppercase">
+        <Timeline.Title className="text-xl leading-7 mt-5 font-medium text-cornflower-blue mb-3  uppercase ">
           {role}
         </Timeline.Title>
         <Timeline.Title>{companyName}</Timeline.Title>

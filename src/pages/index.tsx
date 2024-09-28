@@ -16,6 +16,7 @@ import { ExperienceItem } from "@/components/ExperienceItem";
 import { AnimatedTooltip } from "@/components/TooltipAnimated";
 import { TextGenerateEffect } from "@/components/TextAnimated";
 import { motion } from "framer-motion";
+import FormSendEmail from "@/components/FormSendEmail";
 
 const getPageData = async () => {
   const query = `
@@ -306,6 +307,18 @@ export default function Home({ pageData }: HomePageType) {
           </Timeline>
         </div>
       </section>
+
+      <section className="bg-gray-50 w-full h-full my-5">
+
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <HorizontalDivider className="mb-8" />
+          <FormSendEmail  />
+          
+        </div>
+
+      
+      </section>
+
     </>
   );
 }
