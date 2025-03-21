@@ -2,7 +2,7 @@
 
 Este é o repositório do meu portfólio pessoal, desenvolvido para apresentar minhas habilidades como desenvolvedor e os projetos que já desenvolvi ao longo da minha jornada. O objetivo é ter uma plataforma dinâmica, moderna e otimizada para mostrar meu trabalho de forma eficaz.
 
-## Tecnologias Utilizadas 
+## Tecnologias Utilizadas
 
 Este projeto foi construído utilizando as seguintes tecnologias:
 
