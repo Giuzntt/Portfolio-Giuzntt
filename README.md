@@ -11,7 +11,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
     <img align="center" alt="Next.js" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"> 
     Next.js - Framework React para produção e fácil configuração de SSR (Server-Side Rendering).
     <br/>
-    <!-- React -->
+    <!-- React --> 
     <img align="center" alt="React" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"> 
     React - Biblioteca JavaScript para construir interfaces de usuário de forma eficiente e declarativa.
     <br/>
