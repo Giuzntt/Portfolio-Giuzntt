@@ -14,7 +14,7 @@ Este projeto foi construído utilizando as seguintes tecnologias:
     <!-- React --> 
     <img align="center" alt="React" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"> 
     React - Biblioteca JavaScript para construir interfaces de usuário de forma eficiente e declarativa.
-    <br/>
+    <br/> 
     <!-- TypeScript -->
     <img align="center" alt="TypeScript" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"> 
     TypeScript - Superset do JavaScript que adiciona tipagem estática, ajudando a prevenir erros durante o desenvolvimento.
