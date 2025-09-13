@@ -94,8 +94,8 @@ export default function Home({ pageData }: HomePageType) {
     socials,
     profilePicture,
     highlightProjects,
-  } = pageData.page;
-  const { workExperiences } = pageData;
+  } = pageData?.page || {};
+  const { workExperiences } = pageData || {};
 
   return (
     <>
@@ -309,16 +309,11 @@ export default function Home({ pageData }: HomePageType) {
       </section>
 
       <section className="bg-gray-50 w-full h-full my-5">
-
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <HorizontalDivider className="mb-8" />
-          <FormSendEmail  />
-          
+          <HorizontalDivider className="mb-8" />
+          <FormSendEmail />
         </div>
-
-      
       </section>
-
     </>
   );
 }
