@@ -10,6 +10,7 @@ import { HorizontalDivider } from "@/components/HorizontalDivider";
 import { ProjectCard } from "@/components/ProjectCard";
 import { fetchHygraphQuery } from "@/utils/fetch-hygraph-query";
 import { HomePageType } from "@/types/page-info";
+import { Analytics } from "@vercel/analytics/next";
 import { RichText } from "@/components/rich-text";
 import { ButtonCopy } from "@/components/Button";
 import { ExperienceItem } from "@/components/ExperienceItem";
@@ -102,7 +103,6 @@ export default function Home({ pageData }: HomePageType) {
       <Head>
         <title>Portfólio | Home</title>
       </Head>
-
       <main
         className=" flex flex-col items-center justify-center w-full h-full 
          bg-gradient-to-r from-cornflower-blue to-periwinkle-blue  bg-no-repeat bg-cover mt-10
@@ -235,7 +235,6 @@ export default function Home({ pageData }: HomePageType) {
           </linearGradient>
         </defs>
       </svg>
-
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -271,7 +270,6 @@ export default function Home({ pageData }: HomePageType) {
           </div>
         </div>
       </section>
-
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionTitle title="Conhecimentos" />
@@ -307,13 +305,13 @@ export default function Home({ pageData }: HomePageType) {
           </Timeline>
         </div>
       </section>
-
       <section className="bg-gray-50 w-full h-full my-5">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <HorizontalDivider className="mb-8" />
           <FormSendEmail />
         </div>
       </section>
+      <Analytics />
     </>
   );
 }
